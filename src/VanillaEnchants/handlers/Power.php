@@ -21,9 +21,9 @@ class Power extends VanillaEnchant implements Listener{
 			  return false;
 			}
 			$item = $damager->getInventory()->getItemInHand();
-			if($item->hasEnchantment(19) && $item->isBow()){
+			if($item->hasEnchantment(19) && $item->getId() == 261){
 			  $add = $item->getEnchantment(19)->getLevel() * 0.5 + 3;
-          $event->setFinalDamage($event->getFinalDamage() + $add);
+                          $event->setFinalDamage($event->getFinalDamage() + $add);
 			}
 	   }
 	}
