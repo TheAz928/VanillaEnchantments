@@ -1,6 +1,0 @@
-# Developed by TheAz928(Az928)
-# Vanilla enchants implemention
-# CopyRight (C) @TheAz928 (Az928)
-# All rights reserved (R)
-# This software is under
-# GNU General Public license :v3.0.0 and later
