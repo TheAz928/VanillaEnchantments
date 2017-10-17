@@ -4,7 +4,7 @@ Ever wanted to have working Enchants on your PocketMine-MP server? Well now you 
 # How to install
 Drop the phar file into plugins folder as usual, then just reload server
 
-# ToDo list
+# Implemented Enchantments
 
 - [x] Protection
 - [x] Fire protection
