@@ -22,7 +22,7 @@ class Knockback extends VanillaEnchant implements Listener{
 			}
 			$item = $damager->getInventory()->getItemInHand();
 			if($item->hasEnchantment(12)){
-			  $add = $item->getEnchantment(12)->getLevel() * 0.35;
+			  $add = $item->getEnchantment(12)->getLevel() * 0.2;
           $event->setKnockback($event->getKnockback() + $add);
 			}
 	   }
