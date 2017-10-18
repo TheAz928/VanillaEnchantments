@@ -20,7 +20,7 @@ class BlastProtection extends VanillaEnchant implements Listener{
 			   $reduce *= 2;
 			   $reduce /= 1.5;
 			   $reduce = round($reduce);
-			   $dmg = $event->getFinalDamage() - $reduce;
+			   $dmg = $event->getDamage() - $reduce;
 			   $dmg = $dmg < 0 ? 0 : $dmg;
 			   $event->setDamage($dmg);
 			 }
