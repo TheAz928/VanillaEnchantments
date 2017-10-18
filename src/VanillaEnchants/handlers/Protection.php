@@ -20,7 +20,7 @@ class Protection extends VanillaEnchant implements Listener{
 			   $reduce *= 2;
 			   $reduce /= 1.5;
 			   $reduce = round($reduce);
-			   $dmg = $event->getFinalDamage() - $reduce;
+			   $dmg = $event->getDamage() - $reduce;
 			   $dmg = $dmg < 0 ? 1 : $dmg;
 			   $event->setDamage($dmg);
 			 }
