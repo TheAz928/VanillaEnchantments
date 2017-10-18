@@ -21,7 +21,7 @@ class FireProtection extends VanillaEnchant implements Listener{
 			   $reduce /= 1.5;
 			   $reduce = round($reduce);
 			   $reduce = $reduce < 1 ? 1 : $reduce;
-			   $dmg = $event->getFinalDamage() - $reduce;
+			   $dmg = $event->getDamage() - $reduce;
 			   $dmg = $dmg < 0 ? 0 : $dmg;
 			   $event->setDamage($dmg);
 			 }
