@@ -17,9 +17,8 @@ class ProjectileProtection extends VanillaEnchant implements Listener{
 	    if($player instanceof Player && $event->getCause() == EntityDamageEvent::CAUSE_PROJECTILE){
 		    $reduce = $this->getArmorPoints($player, 4);
 		    if($reduce > 0){
-			   $reduce *= 2;
-			   $reduce /= 1.5;
-			   $reduce = round($reduce);
+			   $reduce /= 2;
+			   $reduce += 1;
 			   $dmg = $event->getDamage() - $reduce;
 			   $dmg = $dmg < 0 ? 1 : $dmg;
 			   $event->setDamage($dmg);

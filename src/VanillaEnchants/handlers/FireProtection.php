@@ -17,9 +17,6 @@ class FireProtection extends VanillaEnchant implements Listener{
 	    if($player instanceof Player && ($event->getCause() == EntityDamageEvent::CAUSE_FIRE or $event->getCause() == EntityDamageEvent::CAUSE_FIRE_TICK)){
 		    $reduce = $this->getArmorPoints($player, 1);
 		    if($reduce > 0){
-			   $reduce *= 2;
-			   $reduce /= 1.5;
-			   $reduce = round($reduce);
 			   $reduce = $reduce < 1 ? 1 : $reduce;
 			   $dmg = $event->getDamage() - $reduce;
 			   $dmg = $dmg < 0 ? 0 : $dmg;

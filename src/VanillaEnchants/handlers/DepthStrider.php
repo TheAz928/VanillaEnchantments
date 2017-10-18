@@ -15,7 +15,7 @@ class DepthStrider extends VanillaEnchant implements Listener{
 	public function onMove(PlayerMoveEvent $event){
 	    $player = $event->getPlayer();
 	    $add = $this->getArmorPoints($player, 7);
-       $speed = $player->getAttributeMap()->getAttribute(5)->getDefaultValue() + ($add * 0.035); # Not sure about actual speed
+       $speed = $player->getAttributeMap()->getAttribute(5)->getDefaultValue() + ($add * 0.03); # Not sure about actual speed
 	    if(in_array($player->getLevel()->getBlock($player)->getId(), [8, 9]) && $add > 0){
 	      if($player->getAttributeMap()->getAttribute(5)->getValue() < $speed){
 	        $player->getAttributeMap()->getAttribute(5)->setValue($speed, false, true);

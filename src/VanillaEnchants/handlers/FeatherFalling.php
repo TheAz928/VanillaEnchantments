@@ -18,7 +18,7 @@ class FeatherFalling extends VanillaEnchant implements Listener{
 		    $reduce = $this->getArmorPoints($player, 2);
 		    if($reduce > 0){
 			   $reduce *= 2;
-			   $dmg = $event->getFinalDamage() - $reduce;
+			   $dmg = $event->getDamage() - $reduce;
 			   $dmg = $dmg < 0 ? 0 : $dmg;
 			   $event->setDamage($dmg);
 			 }
