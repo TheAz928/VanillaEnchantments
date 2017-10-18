@@ -12,9 +12,9 @@ Drop the phar file into plugins folder as usual, then just reload server
 - [x] Blast protection
 - [x] Projectile protection
 - [x] Thorns
-- [x] Respiration **Experimental**
+- [x] Respiration
 - [x] Depth strider
-- [x] Aqua infinity **Experimental**
+- [x] Aqua affinity
 - [x] Sharpness
 - [ ] Smite
 - [ ] Bane of athropods
