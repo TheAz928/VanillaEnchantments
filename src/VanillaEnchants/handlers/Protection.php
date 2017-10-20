@@ -14,7 +14,7 @@ class Protection extends VanillaEnchant implements Listener{
 	
 	public function onDamage(EntityDamageEvent $event){
 	    $player = $event->getEntity();
-	    if($player instanceof Player){
+	    if($player instanceof Player && $event->getCause() == EntityDamageEvent::CAUSE_ENTITY_ATTACK){
 		    $reduce = $this->getArmorPoints($player, 0);
 		    if($reduce > 0){
 			   $reduce /= 2;

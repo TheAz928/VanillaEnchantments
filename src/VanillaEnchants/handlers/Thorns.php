@@ -18,13 +18,12 @@ class Thorns extends VanillaEnchant implements Listener{
 	    if($player instanceof Player && $event instanceof EntityDamageByEntityEvent){
 		    $deflect = $this->getArmorPoints($player, 5);
 		    $damager = $event->getDamager();
-		    if($deflect > 0 && rand(1, 100) <= 10){ # 10% chance?
+		    if($deflect > 0 && rand(1, 100) <= 40){ # 40% chance?
 			   if($damager instanceof Player && $damager->isCreative()){
 				  return false;
 				}
-			   $deflect /= 2;
-			   $deflect += 1;
-			   $damager->attack(new EntityDamageByEntityEvent($player, $damager, 0, $deflect));
+			   $deflect /= 1.5;
+			   $damager->attack(new EntityDamageByEntityEvent($player, $damager, EntityDamageEvent::CAUSE_ENTITY_ATTACK, $deflect));
 			 }
 		 }
 	}
