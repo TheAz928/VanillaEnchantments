@@ -77,11 +77,12 @@ class VanillaEnchant{
               $factor *= $level;
 	           $reduce = $base * $factor;
 	        break;
-	        case Enchantment::PROJECTILE_PROTECTION:
-		        $factor = (4 / 100);
+	        case Enchantment::PROTECTION:
+	          $factor = (2.5 / 100);
               $factor *= $level;
 	           $reduce = $base * $factor;
 	        break;
+	        case Enchantment::PROJECTILE_PROTECTION:
 	        case Enchantment::BLAST_PROTECTION:
 		        $factor = (4 / 100);
               $factor *= $level;
