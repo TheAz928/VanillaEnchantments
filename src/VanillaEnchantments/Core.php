@@ -131,7 +131,7 @@ class Core extends PluginBase{
 	}
 	
 	public function registerEfficiency(){ 
-	    Enchantment::registerEnchantment(new Enchantment(15, "Efficiency", 1, 0, Enchantment::SLOT_PICKAXE));
+	    Enchantment::registerEnchantment(new Enchantment(15, "Efficiency", 1, 0, Enchantment::SLOT_TOOL));
    }
 	
 	public function registerSilkTouch(){
@@ -145,7 +145,7 @@ class Core extends PluginBase{
 	}
 	
 	public function registerFortune(){
-	    Enchantment::registerEnchantment(new Enchantment(18, "Fortune", 0, 0, Enchantment::SLOT_PICKAXE)); # Not sure
+	    Enchantment::registerEnchantment(new Enchantment(18, "Fortune", 0, 0, Enchantment::SLOT_TOOL));
 	return new handlers\Fortune($this);
    }
 	
