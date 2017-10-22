@@ -1,25 +1,28 @@
 <?php
-namespace VanillaEnchants\handlers;
+namespace VanillaEnchantments\handlers;
 
 use pocketmine\Player;
 
 use pocketmine\item\Item;
+use pocketmine\item\enchantment\Enchantment;
 
 use pocketmine\event\Listener;
 use pocketmine\event\block\BlockBreakEvent;
 
+use VanillaEnchantments\Core;
+
 class Fortune extends VanillaEnchant implements Listener{
 	
-	public function __construct(){
-	    # Maybe link code?
+	public function __construct(Core $core){
+	    $core->getServer()->getPluginManager()->registerEvents($this, $core);
 	}
 	
-	public function onBlockBreak(BlockBreakEvent $event){
+	public function onBlockBreak(BlockBreakEvent $event): void{
 	    $player = $event->getPlayer();
 	    $block = $event->getBlock();
 	    $item = $player->getInventory()->getItemInHand();
-	    if($event->isCancelled() == false && $item->hasEnchantment(18)){
-	     $level = $item->getEnchantment(17)->getLevel() + 1;
+	    if(!$event->isCancelled() and $item->hasEnchantment(Enchantment::FORTUNE)){
+	     $level = $this->getEnchantmentLevel($item, Enchantment::FORTUNE) + 1;
 	     $rand = rand(1, $level);
 	     switch($block->getId()){
 	         case 16:
@@ -88,6 +91,11 @@ class Fortune extends VanillaEnchant implements Listener{
 	         case 103: # Melon
 	           if($item->isAxe() or $item->isPickaxe()){
 			       $event->setDrops([Item::get(360, 0, rand(3, 9) + $rand)]);
+		        }
+	         break;
+	         case 18: # Leaves
+	           if(rand(1, 100) <= 10 + $level * 2){
+		          $event->setDrops([Item::get(260, 0, 1)]);
 		        }
 	         break;
 	     }

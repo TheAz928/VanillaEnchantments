@@ -1,37 +1,42 @@
 <?php
-namespace VanillaEnchants\handlers;
+namespace VanillaEnchantments\handlers;
 
 use pocketmine\Player;
+
+use pocketmine\item\enchantment\Enchantment;
 
 use pocketmine\event\Listener;
 use pocketmine\event\entity\EntityDeathEvent;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 
+use VanillaEnchantments\Core;
+
 class Looting extends VanillaEnchant implements Listener{
 	
-	public function __construct(){
-	    # Maybe link core?
+	public function __construct(Core $core){
+	    $core->getServer()->getPluginManager()->registerEvents($this, $core);
 	}
 	
-	public function onDamage(EntityDeathEvent $event){
+	public function onDeath(EntityDeathEvent $event): void{
 		  $player = $event->getEntity();
 		  if($player instanceof Player){
-			 return false;
+			 return;
 	     }
 		  $cause = $player->getLastDamageCause();
 		  if($cause instanceof EntityDamageByEntityEvent){
-			 if(($damager = $cause->getDamager()) instanceof Player === false){
-				return false;
+			 $damager = $cause->getDamager();
+			 if(!$damager instanceof Player){
+				return;
 			 }else{
 			   $item = $damager->getInventory()->getItemInHand();
 			 }
 		  }else{
-		   return false;
+		   return;
 		  }
-		  if($item->hasEnchantment(14)){
+		  if($item->hasEnchantment(Enchantment::LOOTING)){
 			 $drops = [];
 		    foreach($event->getDrops() as $drop){
-			   $rand = rand(1, $item->getEnchantment(14)->getLevel() + 1);
+			   $rand = rand(1, $this->getEnchantmentLevel($item, Enchantment::LOOTING) + 1);
 		      $drop->setCount($drop->getCount() + $rand);
 		      $drops[] = $drop;
 		    }
