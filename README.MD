@@ -16,8 +16,8 @@ Drop the phar file into plugins folder as usual, then just reload server
 - [x] Depth strider
 - [x] Aqua affinity
 - [x] Sharpness
-- [ ] Smite
-- [ ] Bane of athropods
+- [x] Smite
+- [x] Bane of athropods
 - [x] Knockback
 - [x] Fire aspect
 - [x] Looting
