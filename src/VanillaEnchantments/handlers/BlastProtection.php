@@ -19,7 +19,7 @@ class BlastProtection extends VanillaEnchant implements Listener{
 	public function onDamage(EntityDamageEvent $event): void{
 	    $player = $event->getEntity();
 	    $cause = $event->getCause();
-	    if($event->isCancelled() and $cause !== $event::CAUSE_EXPLOSION and $cause !== $event::CAUSE_ENTITY_EXPLOSION){
+	    if($event->isCancelled() and $cause !== $event::CAUSE_BLOCK_EXPLOSION and $cause !== $event::CAUSE_ENTITY_EXPLOSION){
 		   return;
 		 }
 	    if($player instanceof Player){
