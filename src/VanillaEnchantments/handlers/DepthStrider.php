@@ -33,6 +33,10 @@ class DepthStrider extends VanillaEnchant implements Listener{
 				    $attribute->setValue($attribute->getDefaultValue(), true, true);
 				  }
 			   }
+		   }else{
+		     if($attribute->getValue() == $attribute->getDefaultValue() * (1/3) * $level){
+				 $attribute->setValue($attribute->getDefaultValue(), true, true);
+				}
 		   }
 		}
 	}
