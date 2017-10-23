@@ -27,14 +27,14 @@ class DepthStrider extends VanillaEnchant implements Listener{
 		   $block = $player->getLevel()->getBlock($player);
 		   if($level > 0){
 			  if(in_array($block->getId(), [8, 9])){
-				 $attribute->setValue($attribute->getDefaultValue() * (1/3) * $level, true, true);
+				 $attribute->setValue($attribute->getDefaultValue() + ($attribute->getDefaultValue() * (1/3) * $level), true, true);
 			  }else{
-			     if($attribute->getValue() == $attribute->getDefaultValue() * (1/3) * $level){
+			     if($attribute->getValue() == $attribute->getDefaultValue() + ($attribute->getDefaultValue() * (1/3) * $level)){
 				    $attribute->setValue($attribute->getDefaultValue(), true, true);
 				  }
 			   }
-		   }else{
-		     if($attribute->getValue() == $attribute->getDefaultValue() * (1/3) * $level){
+		   }elseif($level <= 0){
+		     if($attribute->getValue() == $attribute->getDefaultValue() + ($attribute->getDefaultValue() * (1/3) * $level)){
 				 $attribute->setValue($attribute->getDefaultValue(), true, true);
 				}
 		   }
