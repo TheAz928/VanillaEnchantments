@@ -78,7 +78,7 @@ class VanillaEnchant{
 	           $reduce = $base * $factor;
 	        break;
 	        case Enchantment::PROTECTION:
-	          $factor = (2.5 / 100);
+	          $factor = (1 / 100);
               $factor *= $level;
 	           $reduce = $base * $factor;
 	        break;
@@ -94,7 +94,7 @@ class VanillaEnchant{
 	           $reduce = $base * $factor;
 	        break;
 	     }
-	return isset($reduce) ? round($reduce) : 0.0;
+	return isset($reduce) and $reduce <= $base ? $reduce : abs($base - $reduce);
 	}
 	
 	/*
