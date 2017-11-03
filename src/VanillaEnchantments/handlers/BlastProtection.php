@@ -7,6 +7,7 @@ use pocketmine\item\enchantment\Enchantment;
 
 use pocketmine\event\Listener;
 use pocketmine\event\entity\EntityDamageEvent;
+use pocketmine\event\entity\EntityDamageByEntityEvent;
 
 use VanillaEnchantments\Core;
 
@@ -28,7 +29,9 @@ class BlastProtection extends VanillaEnchant implements Listener{
 		   $reduce = $this->getReducedDamage(Enchantment::BLAST_PROTECTION, $base, $level);
 		   if($reduce > 0){
 			  $event->setDamage($base - $reduce);
-           $event->setKnockBack($event->getKnockBack() * (60 / 100));
+           if($event instanceof EntityDamageByEntityEvent){
+             $event->setKnockBack($event->getKnockBack() * (60 / 100));
+           }
 			}
 		}
 	}

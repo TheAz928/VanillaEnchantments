@@ -24,7 +24,8 @@ class SilkTouch extends VanillaEnchant implements Listener{
 		      if($drop->getId() == $block->getId() and $drop->getDamage() == $block->getDamage()){
 		        $drops[] = $drop;
 		      }else{
-		       $drop[] = Item::get($block->getId(), $block->getDamage(), 1);
+		       $it = Item::get($block->getId(), $block->getDamage(), 1);
+		        $drops[] = $it;
 		      }
 		   }
 		   $event->setDrops($drops);
