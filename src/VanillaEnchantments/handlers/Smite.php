@@ -13,7 +13,7 @@ use VanillaEnchantments\Core;
 
 class Smite extends VanillaEnchant implements Listener{
 	
-	CONST MOBS = ["zombie", "skeleton", "wither", "witherskeleton", "witherskeleton", "zombiepigman", "pigzombie"];
+	CONST MOBS = ["zombie", "skeleton", "wither", "witherskeleton", "witherskeleton", "zombiepigman", "pigzombie", "vex", "stray", "husk", "zombievizombievilager", "villagerzombie"];
 	
 	public function __construct(Core $core){
 	    $core->getServer()->getPluginManager()->registerEvents($this, $core);
