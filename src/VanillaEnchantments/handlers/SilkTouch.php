@@ -1,6 +1,7 @@
 <?php
 namespace VanillaEnchantments\handlers;
 
+use pocketmine\item\Item;
 use pocketmine\item\enchantment\Enchantment;
 
 use pocketmine\event\Listener;
