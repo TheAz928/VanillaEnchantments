@@ -27,7 +27,7 @@ class Knockback extends VanillaEnchant implements Listener{
 		  $item = $damager->getInventory()->getItemInHand();
 		  if($item->hasEnchantment(Enchantment::KNOCKBACK)){
 			 $level = $this->getEnchantmentLevel($item, Enchantment::KNOCKBACK);
-		    $event->setKnockback($event->getKnockback() + 0.3 * $level);
+		    $event->setKnockBack($event->getKnockBack() + 0.3 * $level);
 			}
 		}
 	}

@@ -51,7 +51,7 @@ class Flame extends VanillaEnchant implements Listener{
 		   $ent = Entity::createEntity("Arrow", $player->getLevel(), $nbt, $player, $arrow->isCritical());
 		   $ent->setMotion($ent->getMotion()->multiply($event->getForce()));
 		   $event->setProjectile($ent);
-		   $ent->setOnFire(80 * $level);
+		   $ent->setOnFire(80);
 		}
 	}
 }

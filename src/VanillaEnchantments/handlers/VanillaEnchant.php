@@ -47,7 +47,7 @@ class VanillaEnchant{
 	protected function getExtraDamage(Int $id, Int $base, Int $level): float{
 	     switch($id){
 	        case Enchantment::SHARPNESS:
-	           $dmg = 0.4 * $level + 1;
+	           $dmg = (0.4 * $level) + 1;
 	        break;
 	        case Enchantment::SMITE:
 	           $dmg = 2.5 * $level;
@@ -56,8 +56,7 @@ class VanillaEnchant{
 	           $dmg = 2.5 * $level;
 	        break;
 	        case Enchantment::POWER:
-	           $dmg = ($base * (25 / 100))  * $level + 1;
-	           round($dmg);
+	           $dmg = (($base * (25 / 100))  * $level) + 1;
 	        break;    
 	     }
 	return isset($dmg) ? $dmg : 0.0;
@@ -78,7 +77,7 @@ class VanillaEnchant{
 	           $reduce = $base * $factor;
 	        break;
 	        case Enchantment::PROTECTION:
-	          $factor = (1 / 100);
+	          $factor = (3 / 100);
               $factor *= $level;
 	           $reduce = $base * $factor;
 	        break;
@@ -159,5 +158,19 @@ class VanillaEnchant{
 		 $boots = $inv->getBoots();
 		 $boots->setDamage($boots->getDamage() - $dur > 0 ? $boots->getDamage() - $dur : 0);
 		 $inv->setBoots($boots);
+	}
+	
+	/*
+	 * @void useArmors
+	 * Player $player
+	 * Int $dmg
+	 */
+	
+	public function useArmors(Player $player, Int $dmg = 1): void{
+		 abs($dmg); # Make sure no negative value comes in since it gets negative on this function
+	    $this->addHelmetDurability($player, -$dmg);
+	    $this->addChestplateDurability($player, -$dmg);
+	    $this->addLeggingsDurability($player, -$dmg);
+	    $this->addBootsDurability($player, -$dmg);
 	}
 }

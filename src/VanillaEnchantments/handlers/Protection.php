@@ -22,6 +22,7 @@ class Protection extends VanillaEnchant implements Listener{
 	    if($event->isCancelled() or $cause == $event::CAUSE_STARVATION or $cause == $event::CAUSE_MAGIC){
 		   return;
 		 }
+       $this->useArmors($player);
 	    if($player instanceof Player){
 		   $level = $this->getEnchantmentLevelOfArmors($player, Enchantment::PROTECTION);
 		   $base = $event->getDamage();

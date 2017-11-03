@@ -28,7 +28,7 @@ class BlastProtection extends VanillaEnchant implements Listener{
 		   $reduce = $this->getReducedDamage(Enchantment::BLAST_PROTECTION, $base, $level);
 		   if($reduce > 0){
 			  $event->setDamage($base - $reduce);
-           $event->setKnockback($event->getKnockback() * (60 / 100));
+           $event->setKnockBack($event->getKnockBack() * (60 / 100));
 			}
 		}
 	}

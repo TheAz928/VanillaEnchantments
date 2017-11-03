@@ -27,7 +27,7 @@ class ProjectileProtection extends VanillaEnchant implements Listener{
 		   $base = $event->getDamage();
 		   $reduce = $this->getReducedDamage(Enchantment::PROJECTILE_PROTECTION, $base, $level);
 		   if($reduce > 0){
-			  $event->setDamage($dmg - $reduce);
+			  $event->setDamage($base - $reduce);
 			}
 		}
 	}

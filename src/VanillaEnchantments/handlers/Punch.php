@@ -27,7 +27,7 @@ class Punch extends VanillaEnchant implements Listener{
 		  $item = $damager->getInventory()->getItemInHand();
 		  if($item->hasEnchantment(Enchantment::PUNCH) and $item->getId() == 261){
 			 $level = $this->getEnchantmentLevel($item, Enchantment::PUNCH);
-			 $event->setKnockback($event->getKnockback() + 0.2 * $level);
+			 $event->setKnockBack($event->getKnockBack() + 0.2 * $level);
 			}
 		}
 	}
