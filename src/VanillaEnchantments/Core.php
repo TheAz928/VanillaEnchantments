@@ -54,7 +54,7 @@ class Core extends PluginBase{
 	 * @return Handler
 	 */
 	
-	public function registerProtection(): void{
+	public function registerProtection(){
 	    Enchantment::registerEnchantment(new Enchantment(Enchantment::PROTECTION, "Protection", 0, 0, Enchantment::SLOT_ARMOR));
 	return new handlers\Protection($this);
 	}
@@ -64,7 +64,7 @@ class Core extends PluginBase{
 	 * @return Handler
 	 */
 	
-	public function registerFireProtection(): void{
+	public function registerFireProtection(){
 	    Enchantment::registerEnchantment(new Enchantment(Enchantment::FIRE_PROTECTION, "Fire protection", 1, 0, Enchantment::SLOT_ARMOR));
 	return new handlers\FireProtection($this);   
 	}
@@ -74,7 +74,7 @@ class Core extends PluginBase{
 	 * @return Handler
 	 */
 	
-	public function registerFeatherFalling(): void{
+	public function registerFeatherFalling(){
 	    Enchantment::registerEnchantment(new Enchantment(Enchantment::FEATHER_FALLING, "Feather falling", 1, 0, Enchantment::SLOT_FEET));
 	return new handlers\FeatherFalling($this);
 	}
@@ -84,7 +84,7 @@ class Core extends PluginBase{
 	 * @return Handler
 	 */
 	
-	public function registerBlastProtection(): void{
+	public function registerBlastProtection(){
 	    Enchantment::registerEnchantment(new Enchantment(Enchantment::BLAST_PROTECTION, "Blast protection", 1, 0, Enchantment::SLOT_ARMOR));
 	return new handlers\BlastProtection($this);
 	}
@@ -94,7 +94,7 @@ class Core extends PluginBase{
 	 * @return Handler
 	 */
 	
-	public function registerProjectileProtection(): void{
+	public function registerProjectileProtection(){
 	    Enchantment::registerEnchantment(new Enchantment(Enchantment::PROJECTILE_PROTECTION, "Projectile protection", 1, 0, Enchantment::SLOT_ARMOR));
 	return new handlers\ProjectileProtection($this);
 	}
@@ -104,7 +104,7 @@ class Core extends PluginBase{
 	 * @return Handler
 	 */
 	
-	public function registerThorns(): void{
+	public function registerThorns(){
 	    Enchantment::registerEnchantment(new Enchantment(Enchantment::THORNS, "Thorns", 1, 0, Enchantment::SLOT_ARMOR));
 	return new handlers\Thorns($this);
 	}
@@ -114,7 +114,7 @@ class Core extends PluginBase{
 	 * @return Handler
 	 */
 	
-	public function registerRespiration(): void{
+	public function registerRespiration(){
 	    Enchantment::registerEnchantment(new Enchantment(Enchantment::RESPIRATION, "Respiration", 1, 0, Enchantment::SLOT_HEAD));
 	}
 	
@@ -123,7 +123,7 @@ class Core extends PluginBase{
 	 * @return Handler
 	 */
 	
-	public function registerDepthStrider(): void{
+	public function registerDepthStrider(){
 	    Enchantment::registerEnchantment(new Enchantment(Enchantment::DEPTH_STRIDER, "Depth strider", 1, 0, Enchantment::SLOT_FEET));
 	return new handlers\DepthStrider($this);
 	}
@@ -133,7 +133,7 @@ class Core extends PluginBase{
 	 * @return Handler
 	 */
 	
-	public function registerAquaAffinity(): void{
+	public function registerAquaAffinity(){
 	    Enchantment::registerEnchantment(new Enchantment(Enchantment::AQUA_AFFINITY, "Aqua Affinity", 1, 0, Enchantment::SLOT_HEAD));
 	}
 	
@@ -142,7 +142,7 @@ class Core extends PluginBase{
 	 * @return Handler
 	 */
 	
-	public function registerSharpness(): void{
+	public function registerSharpness(){
 	    Enchantment::registerEnchantment(new Enchantment(Enchantment::SHARPNESS, "Sharpness", 1, 0, Enchantment::SLOT_TOOL));
 	return new handlers\Sharpness($this);
 	}
@@ -152,7 +152,7 @@ class Core extends PluginBase{
 	 * @return Handler
 	 */
 	
-	public function registerSmite(): void{
+	public function registerSmite(){
 	    Enchantment::registerEnchantment(new Enchantment(Enchantment::SMITE, "Smite", 1, 0, Enchantment::SLOT_SWORD));
 	return new handlers\Smite($this);
 	}
@@ -162,7 +162,7 @@ class Core extends PluginBase{
 	 * @return Handler
 	 */
 	
-	public function registerBaneOfArthropods(): void{
+	public function registerBaneOfArthropods(){
 	    Enchantment::registerEnchantment(new Enchantment(Enchantment::BANE_OF_ARTHROPODS, "Bane of Arthropods", 1, 0, Enchantment::SLOT_SWORD));
 	return new handlers\BaneOfArthropods($this);
 	}
@@ -172,7 +172,7 @@ class Core extends PluginBase{
 	 * @return Handler
 	 */
 
-	public function registerKnockback(): void{
+	public function registerKnockback(){
 	    Enchantment::registerEnchantment(new Enchantment(Enchantment::KNOCKBACK, "Knockback", 1, 0, Enchantment::SLOT_SWORD));
 	return new handlers\Knockback($this);
    }
@@ -182,7 +182,7 @@ class Core extends PluginBase{
 	 * @return Handler
 	 */
 	
-	public function registerFireAspect(): void{
+	public function registerFireAspect(){
 	    Enchantment::registerEnchantment(new Enchantment(Enchantment::FIRE_ASPECT, "Fire aspect", 1, 0, Enchantment::SLOT_SWORD));
 	return new handlers\FireAspect($this);
 	}
@@ -192,7 +192,7 @@ class Core extends PluginBase{
 	 * @return Handler
 	 */
 	
-	public function registerLooting(): void{
+	public function registerLooting(){
 	    Enchantment::registerEnchantment(new Enchantment(Enchantment::LOOTING, "Looting", 1, 0, Enchantment::SLOT_SWORD));
 	return new handlers\Looting($this);
 	}
@@ -202,7 +202,7 @@ class Core extends PluginBase{
 	 * @return Handler
 	 */
 	
-	public function registerEfficiency(): void{ 
+	public function registerEfficiency(){ 
 	    Enchantment::registerEnchantment(new Enchantment(Enchantment::EFFICIENCY, "Efficiency", 1, 0, Enchantment::SLOT_PICKAXE));
    }
 
@@ -211,7 +211,7 @@ class Core extends PluginBase{
 	 * @return Handler
 	 */
 	
-	public function registerSilkTouch(): void{
+	public function registerSilkTouch(){
 	    Enchantment::registerEnchantment(new Enchantment(Enchantment::SILK_TOUCH, "Silk touch", 2, 0, Enchantment::SLOT_TOOL));
 	return new handlers\SilkTouch($this);
 	}
@@ -221,7 +221,7 @@ class Core extends PluginBase{
 	 * @return Handler
 	 */
 	
-	public function registerUnbreaking(): void{
+	public function registerUnbreaking(){
 	    Enchantment::registerEnchantment(new Enchantment(Enchantment::UNBREAKING, "Unbreaking", 0, 0, Enchantment::SLOT_TOOL));
 	return new handlers\Unbreaking($this);
 	}
@@ -231,7 +231,7 @@ class Core extends PluginBase{
 	 * @return Handler
 	 */
 	
-	public function registerFortune(): void{
+	public function registerFortune(){
 	    Enchantment::registerEnchantment(new Enchantment(Enchantment::FORTUNE, "Fortune", 0, 0, Enchantment::SLOT_PICKAXE)); # Not sure
 	return new handlers\Fortune($this);
    }
@@ -241,7 +241,7 @@ class Core extends PluginBase{
 	 * @return Handler
 	 */
 	
-	public function registerPower(): void{
+	public function registerPower(){
 	    Enchantment::registerEnchantment(new Enchantment(Enchantment::POWER, "Power", 0, 0, Enchantment::SLOT_BOW));
 	return new handlers\Power($this);
 	}
@@ -251,7 +251,7 @@ class Core extends PluginBase{
 	 * @return Handler
 	 */
 	
-	public function registerPunch(): void{
+	public function registerPunch(){
 	    Enchantment::registerEnchantment(new Enchantment(Enchantment::PUNCH, "Punch", 1, 0, Enchantment::SLOT_BOW));
 	return new handlers\Punch($this);
 	}
@@ -261,7 +261,7 @@ class Core extends PluginBase{
 	 * @return Handler
 	 */
 	
-	public function registerFlame(): void{
+	public function registerFlame(){
 	    Enchantment::registerEnchantment(new Enchantment(Enchantment::FLAME, "Flame", 1, 0, Enchantment::SLOT_BOW));
 	return new handlers\Flame($this);
 	}
@@ -271,7 +271,7 @@ class Core extends PluginBase{
 	 * @return Handler
 	 */
 	
-	public function registerInfinity(): void{
+	public function registerInfinity(){
 	    Enchantment::registerEnchantment(new Enchantment(Enchantment::INFINITY, "Infinity", 2, 0, Enchantment::SLOT_BOW));
 	return new handlers\Infinity($this);
 	}
