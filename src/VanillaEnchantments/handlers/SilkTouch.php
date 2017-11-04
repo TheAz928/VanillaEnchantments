@@ -15,6 +15,13 @@ class SilkTouch extends VanillaEnchant implements Listener{
 	    $core->getServer()->getPluginManager()->registerEvents($this, $core);
 	}
 	
+	/*
+	 * @void onBreak
+	 * @param BlockBreakEvent $event
+	 * @priority HIGHEST
+	 * ignoreCancelled true
+	 */
+	
 	public function onBreak(BlockBreakEvent $event): void{
 	    $item = $event->getItem();
 	    $block = $event->getBlock();

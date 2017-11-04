@@ -17,6 +17,13 @@ class Fortune extends VanillaEnchant implements Listener{
 	    $core->getServer()->getPluginManager()->registerEvents($this, $core);
 	}
 	
+	/*
+	 * @void onBlockBreak
+	 * @param BlockBreakEvent $event
+	 * @priority MEDIUM
+	 * ignoreCancelled false
+	 */
+	
 	public function onBlockBreak(BlockBreakEvent $event): void{
 	    $player = $event->getPlayer();
 	    $block = $event->getBlock();

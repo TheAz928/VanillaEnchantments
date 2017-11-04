@@ -17,6 +17,13 @@ class Looting extends VanillaEnchant implements Listener{
 	    $core->getServer()->getPluginManager()->registerEvents($this, $core);
 	}
 	
+	/*
+	 * @void onDeath
+	 * @param EntityDeathEvent $event
+	 * @priority LOWESR
+	 * ignoreCancelled true
+	 */
+	
 	public function onDeath(EntityDeathEvent $event): void{
 		  $player = $event->getEntity();
 		  if($player instanceof Player){

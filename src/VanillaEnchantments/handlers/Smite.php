@@ -13,11 +13,18 @@ use VanillaEnchantments\Core;
 
 class Smite extends VanillaEnchant implements Listener{
 	
-	CONST MOBS = ["zombie", "skeleton", "wither", "witherskeleton", "witherskeleton", "zombiepigman", "pigzombie", "vex", "stray", "husk", "zombievillager", "villagerzombie"];
+	CONST MOBS = ["zombie", "skeleton", "wither", "witherskeleton", "witherskeleton", "zombiepigman", "pigzombie"];
 	
 	public function __construct(Core $core){
 	    $core->getServer()->getPluginManager()->registerEvents($this, $core);
 	}
+	
+	/*
+	 * @void onDamage
+	 * @param EntityDamageEvent $event
+	 * @priority LOWEST
+	 * ignoreCancelled true
+	 */
 	
 	public function onDamage(EntityDamageEvent $event): void{
 	    $player = $event->getEntity();

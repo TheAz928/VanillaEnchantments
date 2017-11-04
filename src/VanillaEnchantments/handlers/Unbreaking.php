@@ -20,6 +20,13 @@ class Unbreaking extends VanillaEnchant implements Listener{
 	    $core->getServer()->getPluginManager()->registerEvents($this, $core);
 	}
 	
+	/*
+	 * @void onBlockBreak
+	 * @param BlockBreakEvent $event
+	 * @priority MEDIUM
+	 * ignoreCancelled false
+	 */
+	
 	public function onBlockBreak(BlockBreakEvent $event): void{
 	    $player = $event->getPlayer();
 	    $item = $player->getInventory()->getItemInHand();
@@ -30,6 +37,13 @@ class Unbreaking extends VanillaEnchant implements Listener{
 	      $player->getInventory()->setItemInHand($item);
 	   }
 	}
+	
+	/*
+	 * @void onInteract
+	 * @param PlayerInteractEvent $event
+	 * @priority MEDIUM
+	 * ignoreCancelled false
+	 */
 	
 	public function onInteract(PlayerInteractEvent $event): void{
 	    $player = $event->getPlayer();
@@ -46,6 +60,13 @@ class Unbreaking extends VanillaEnchant implements Listener{
 			}
 		}
 	}
+	
+	/*
+	 * @void onDamage
+	 * @param EntityDamageEvent $event
+	 * @priority MEDIUM
+	 * ignoreCancelled false
+	 */
 	
 	public function onDamage(EntityDamageEvent $event): void{
 	    $player = $event->getEntity();
@@ -74,6 +95,13 @@ class Unbreaking extends VanillaEnchant implements Listener{
 		}
 	}
 	
+	/*
+	 * @void onItemDamage
+	 * @param EntityDamageEvent $event
+	 * @priority MEDIUM
+	 * ignoreCancelled false
+	 */
+	
 	public function onItemDamage(EntityDamageEvent $event): void{
 	    if($event instanceof EntityDamageByEntityEvent){
 		   $player = $event->getEntity();
@@ -90,6 +118,13 @@ class Unbreaking extends VanillaEnchant implements Listener{
 			}
 	   }
 	}
+	
+	/*
+	 * @void onShoot
+	 * @param EntityShootBowEvent $event
+	 * @priority HIGH
+	 * ignoreCancelled false
+	 */
 
    public function onShoot(EntityShootBowEvent $event): void{
         $player = $event->getEntity();

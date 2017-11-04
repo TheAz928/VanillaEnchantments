@@ -22,6 +22,13 @@ class Flame extends VanillaEnchant implements Listener{
 	    $core->getServer()->getPluginManager()->registerEvents($this, $core);
 	}
 	
+	/*
+	 * @void onShoot
+	 * @param EntityShootBowEvent $event
+	 * @priority HIGHEST
+	 * ignoreCancelled false
+	 */
+	
 	public function onShoot(EntityShootBowEvent $event): void{
 	    $player = $event->getEntity();
 	    $bow = $event->getBow();
@@ -51,7 +58,7 @@ class Flame extends VanillaEnchant implements Listener{
 		   $ent = Entity::createEntity("Arrow", $player->getLevel(), $nbt, $player, $arrow->isCritical());
 		   $ent->setMotion($ent->getMotion()->multiply($event->getForce()));
 		   $event->setProjectile($ent);
-		   $ent->setOnFire(80);
+		   $ent->setOnFire(80 * $level / 2);
 		}
 	}
 }

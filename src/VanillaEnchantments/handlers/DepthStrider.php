@@ -16,12 +16,19 @@ class DepthStrider extends VanillaEnchant implements Listener{
 	    $core->getServer()->getPluginManager()->registerEvents($this, $core);
 	}
 	
+	/*
+	 * @void onMove
+	 * @param PlayerMoveEvent $event
+	 * @priority HIGHEST
+	 * ignoreCancelled false
+	 */
+	
 	public function onMove(PlayerMoveEvent $event): void{
 	    $player = $event->getPlayer();
 	    if($event->isCancelled()){
 		   return;
 		 }
-	    if($player instanceof Player){
+	    if($player instanceof Player){ # Not sure why :]
 		   $level = $this->getEnchantmentLevelOfArmors($player, Enchantment::DEPTH_STRIDER);
 		   $attribute = $player->getAttributeMap()->getAttribute(5);
 		   $block = $player->getLevel()->getBlock($player);

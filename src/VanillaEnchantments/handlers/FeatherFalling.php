@@ -16,6 +16,13 @@ class FeatherFalling extends VanillaEnchant implements Listener{
 	    $core->getServer()->getPluginManager()->registerEvents($this, $core);
 	}
 	
+	/*
+	 * @void onDamage
+	 * @param EntityDamageEvent $event
+	 * @priority MEDIUM
+	 * ignoreCancelled false
+	 */
+	
 	public function onDamage(EntityDamageEvent $event): void{
 	    $player = $event->getEntity();
 	    $cause = $event->getCause();

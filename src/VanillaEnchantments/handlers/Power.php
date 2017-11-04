@@ -17,6 +17,13 @@ class Power extends VanillaEnchant implements Listener{
 	    $core->getServer()->getPluginManager()->registerEvents($this, $core);
 	}
 	
+	/*
+	 * @void onDamage
+	 * @param EntityDamageEvent $event
+	 * @priority MEDIUM
+	 * ignoreCancelled true
+	 */
+	
 	public function onDamage(EntityDamageEvent $event): void{
 	    $player = $event->getEntity();
 	    if($event instanceof EntityDamageByEntityEvent){

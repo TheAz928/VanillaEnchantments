@@ -18,6 +18,13 @@ class Infinity extends VanillaEnchant implements Listener{
 	    $core->getServer()->getPluginManager()->registerEvents($this, $core);
 	}
 	
+	/*
+	 * @void onShoot
+	 * @param EntityShootBowEvent $event
+	 * @priority HIGHEST
+	 * ignoreCancelled false
+	 */
+	
 	public function onShoot(EntityShootBowEvent $event): void{
 	    $player = $event->getEntity();
 	    $bow = $event->getBow();

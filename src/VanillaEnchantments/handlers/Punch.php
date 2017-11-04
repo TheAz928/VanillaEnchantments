@@ -17,11 +17,18 @@ class Punch extends VanillaEnchant implements Listener{
 	    $core->getServer()->getPluginManager()->registerEvents($this, $core);
 	}
 	
+	/*
+	 * @void onDamage
+	 * @param EntityDamageEvent $event
+	 * @priority MEDIUM
+	 * ignoreCancelled false
+	 */
+	
 	public function onDamage(EntityDamageEvent $event): void{
 	    $player = $event->getEntity();
 	    if($event instanceof EntityDamageByEntityEvent){
 		   $damager = $event->getDamager();
-		   if(!$damager instanceof Player){
+		   if(!$damager instanceof Player or $event->isCancelled()){
 			  return;
 			}
 		  $item = $damager->getInventory()->getItemInHand();

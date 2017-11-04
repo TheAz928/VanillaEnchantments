@@ -13,11 +13,19 @@ use VanillaEnchantments\Core;
 
 class BaneOfArthropods extends VanillaEnchant implements Listener{
 	
+	/* @constant MOBS */
 	CONST MOBS = ["spider", "cavespider", "silverfish", "endermite"];
-	
+
 	public function __construct(Core $core){
 	    $core->getServer()->getPluginManager()->registerEvents($this, $core);
 	}
+	
+	/*
+	 * @void onDamage
+	 * @param EntityDamageEvent $event
+	 * @priority MEDIUM
+	 * ignoreCancelled true
+	 */
 	
 	public function onDamage(EntityDamageEvent $event): void{
 	    $player = $event->getEntity();
