@@ -1,5 +1,7 @@
 # VanillaEnchants
 Ever wanted to have working Enchants on your PocketMine-MP server? Well now you can!
+[![](https://poggit.pmmp.io/shield.approved/VanillaEnchantments)](https://poggit.pmmp.io/p/VanillaEnchantments)
+<a href="https://poggit.pmmp.io/p/VanillaEnchantments"><img src="https://poggit.pmmp.io/shield.approved/VanillaEnchantments"></a>
 
 # How to install
 Drop the phar file into plugins folder as usual, then just reload server
