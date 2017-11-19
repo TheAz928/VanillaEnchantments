@@ -8,6 +8,43 @@ use pocketmine\item\enchantment\Enchantment;
 
 class VanillaEnchant{
 	
+	const HELMET =  [
+	      298 => 56,
+	      314 => 78,
+	      302 => 166,
+	      306 => 166,
+	      310 => 364
+	];
+	
+	const CHESTPLATE = [
+	      299 => 81,
+	      315 => 113,
+	      303 => 241,
+	      307 => 241,
+	      311 => 529
+	];
+	
+	const LEGGINGS = [
+	      300 => 76,
+	      316 => 106,
+	      304 => 266,
+	      308 => 266,
+	      312 => 497
+	];
+	
+	const BOOTS = [
+	      301 => 66,
+	      317 => 92,
+	      305 => 196,
+	      309 => 196,
+	      313 => 430
+	];
+	
+	const REJECTED = [
+	      Item::SKULL,
+	      Item::PUMPKIN
+	];
+	
 	/*
 	 * Player $player
 	 * Int $id
@@ -104,12 +141,16 @@ class VanillaEnchant{
 	
 	protected function addHelmetDurability(Player $player, Int $dur): void{
 	    $inv = $player->getInventory();
-	    if($inv->getHelmet()->getId() == 0){
+	    if($inv->getHelmet()->getId() == 0 or in_array($inv->getHelmet()->getId(), self::REJECTED)){
 		   return;
 		 }
 		 $helmet = $inv->getHelmet();
 		 $helmet->setDamage($helmet->getDamage() - $dur > 0 ? $helmet->getDamage() - $dur : 0);
 		 $inv->setHelmet($helmet);
+		 $breakAt = self::HELMET[$helmet->getId()];
+		 if($helmet->getDamage() >= $breakAt){
+			$inv->setHelmet(Item::get(0, 0, 0));
+		 }
 	}
 	
 	/*
@@ -126,6 +167,10 @@ class VanillaEnchant{
 		 $chestplate = $inv->getChestplate();
 		 $chestplate->setDamage($chestplate->getDamage() - $dur > 0 ? $chestplate->getDamage() - $dur : 0);
 		 $inv->setChestplate($chestplate);
+		 $breakAt = self::CHESTPLATE[$chestplate->getId()];
+		 if($chestplate->getDamage() >= $breakAt){
+			$inv->setChestplate(Item::get(0, 0, 0));
+		 }
 	}
 	
 	/*
@@ -142,6 +187,10 @@ class VanillaEnchant{
 		 $leggings = $inv->getLeggings();
 		 $leggings->setDamage($leggings->getDamage() - $dur > 0 ? $leggings->getDamage() - $dur : 0);
 		 $inv->setLeggings($leggings);
+		 $breakAt = self::LEGGINGS[$leggings->getId()];
+		 if($leggings->getDamage() >= $breakAt){
+			$inv->setLeggings(Item::get(0, 0, 0));
+		 }
 	}
 	
 	/*
@@ -158,6 +207,10 @@ class VanillaEnchant{
 		 $boots = $inv->getBoots();
 		 $boots->setDamage($boots->getDamage() - $dur > 0 ? $boots->getDamage() - $dur : 0);
 		 $inv->setBoots($boots);
+		 $breakAt = self::BOOTS[$boots->getId()];
+		 if($boots->getDamage() >= $breakAt){
+			$inv->setBoots(Item::get(0, 0, 0));
+		 }
 	}
 	
 	/*
