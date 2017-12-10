@@ -48,7 +48,7 @@ class VanillaEnchant{
 	/** @var Int[] */
 	private $cd = [];
 	
-	/*
+	/**
 	 * @param Player $player
 	 * @param Int $id
 	 * @return Int 
@@ -64,7 +64,7 @@ class VanillaEnchant{
 	return $return;
 	}
 	
-	/*
+	/**
 	 * @param Item $item
 	 * @param Int $id
 	 * @return Int 
@@ -77,7 +77,7 @@ class VanillaEnchant{
 	return 0;
 	}
 	
-	/*
+	/**
 	 * @param Int $id enchantment id
 	 * @param Int $base
 	 * @param Int $level
@@ -102,7 +102,7 @@ class VanillaEnchant{
 	return isset($dmg) ? $dmg : 0.0;
 	}
 	
-	/*
+	/**
 	 * @param Int $id
 	 * @param Int $level
 	 * @param Int $base
@@ -153,7 +153,7 @@ class VanillaEnchant{
 	return false;
 	}
 	
-	/*
+	/**
 	 * @param Player $player
 	 * @param Int $dur
 	 */
@@ -172,7 +172,7 @@ class VanillaEnchant{
 		 }
 	}
 	
-	/*
+	/**
 	 * @param Player $player
 	 * @param Int $dur
 	 */
@@ -191,7 +191,7 @@ class VanillaEnchant{
 		 }
 	}
 	
-	/*
+	/**
 	 * @param Player $player
 	 * @param Int $dur
 	 */
@@ -210,7 +210,7 @@ class VanillaEnchant{
 		 }
 	}
 	
-	/*
+	/**
 	 * @param Player $player
 	 * @param Int $dur
 	 */
@@ -229,7 +229,7 @@ class VanillaEnchant{
 		 }
 	}
 	
-	/*
+	/**
 	 * @param Player $player
 	 * @param Int $dmg
 	 */
