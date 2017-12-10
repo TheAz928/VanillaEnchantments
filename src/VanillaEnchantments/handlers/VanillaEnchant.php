@@ -141,13 +141,13 @@ class VanillaEnchant{
 	 * @return bool
 	 */
 	
-	public function checkCoolDown(Player $player): bool{
-	    if(isset($this->cd[$player->getName()]) == false){
-		   $this->cd[$player->getName()] = time();
+	public function checkCoolDown(string $var, Int $cd = 1, Player $player): bool{
+	    if(isset($this->cd[$var][$player->getName()]) == false){
+		   $this->cd[$var][$player->getName()] = time();
 		 return true;
 		 }
-		 if((time() - $this->cd[$player->getName()]) >= 1){
-			$this->cd[$player->getName()] = time();
+		 if(($this->cd[$var][$player->getName()] + $cd) - time() <= 0){
+			$this->cd[$var][$player->getName()] = time();
 		 return true;
 	 	 }
 	return false;
@@ -160,7 +160,7 @@ class VanillaEnchant{
 	
 	protected function addHelmetDurability(Player $player, Int $dur): void{
 	    $inv = $player->getInventory();
-	    if($inv->getHelmet()->getId() == 0 or in_array($inv->getHelmet()->getId(), self::REJECTED) or $this->checkCoolDown($player) == false){
+	    if($inv->getHelmet()->getId() == 0 or in_array($inv->getHelmet()->getId(), self::REJECTED)){
 		   return;
 		 }
 		 $helmet = $inv->getHelmet();
@@ -179,7 +179,7 @@ class VanillaEnchant{
 	
 	protected function addChestplateDurability(Player $player, Int $dur): void{
 	    $inv = $player->getInventory();
-	    if($inv->getChestplate()->getId() == 0 or $this->checkCoolDown($player) == false){
+	    if($inv->getChestplate()->getId() == 0){
 		   return;
 		 }
 		 $chestplate = $inv->getChestplate();
@@ -198,7 +198,7 @@ class VanillaEnchant{
 	
 	protected function addLeggingsDurability(Player $player, Int $dur): void{
 	    $inv = $player->getInventory();
-	    if($inv->getLeggings()->getId() == 0 or $this->checkCoolDown($player) == false){
+	    if($inv->getLeggings()->getId() == 0){
 		   return;
 		 }
 		 $leggings = $inv->getLeggings();
@@ -217,7 +217,7 @@ class VanillaEnchant{
 	
 	protected function addBootsDurability(Player $player, Int $dur): void{
 	    $inv = $player->getInventory();
-	    if($inv->getBoots()->getId() == 0 or $this->checkCoolDown($player) == false){
+	    if($inv->getBoots()->getId() == 0){
 		   return;
 		 }
 		 $boots = $inv->getBoots();
