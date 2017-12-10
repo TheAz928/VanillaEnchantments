@@ -49,8 +49,8 @@ class VanillaEnchant{
 	private $cd = [];
 	
 	/*
-	 * param Player $player
-	 * param Int $id
+	 * @param Player $player
+	 * @param Int $id
 	 * @return Int 
 	 */
 	
@@ -65,8 +65,8 @@ class VanillaEnchant{
 	}
 	
 	/*
-	 * param Item $item
-	 * param Int $id
+	 * @param Item $item
+	 * @param Int $id
 	 * @return Int 
 	 */
 	
@@ -78,9 +78,9 @@ class VanillaEnchant{
 	}
 	
 	/*
-	 * param Int $id enchantment id
-	 * param Int $base
-	 * param Int $level
+	 * @param Int $id enchantment id
+	 * @param Int $base
+	 * @param Int $level
 	 * @return Int|float
 	 */
 	
@@ -103,9 +103,9 @@ class VanillaEnchant{
 	}
 	
 	/*
-	 * param Int $id
-	 * param Int $level
-	 * param Int $base
+	 * @param Int $id
+	 * @param Int $level
+	 * @param Int $base
 	 * @return Int|float
 	 */
 	
@@ -154,8 +154,8 @@ class VanillaEnchant{
 	}
 	
 	/*
-	 * param Player $player
-	 * param Int $dur
+	 * @param Player $player
+	 * @param Int $dur
 	 */
 	
 	protected function addHelmetDurability(Player $player, Int $dur): void{
@@ -173,8 +173,8 @@ class VanillaEnchant{
 	}
 	
 	/*
-	 * param Player $player
-	 * param Int $dur
+	 * @param Player $player
+	 * @param Int $dur
 	 */
 	
 	protected function addChestplateDurability(Player $player, Int $dur): void{
@@ -192,8 +192,8 @@ class VanillaEnchant{
 	}
 	
 	/*
-	 * param Player $player
-	 * param Int $dur
+	 * @param Player $player
+	 * @param Int $dur
 	 */
 	
 	protected function addLeggingsDurability(Player $player, Int $dur): void{
@@ -211,8 +211,8 @@ class VanillaEnchant{
 	}
 	
 	/*
-	 * param Player $player
-	 * param Int $dur
+	 * @param Player $player
+	 * @param Int $dur
 	 */
 	
 	protected function addBootsDurability(Player $player, Int $dur): void{
@@ -230,8 +230,8 @@ class VanillaEnchant{
 	}
 	
 	/*
-	 * param Player $player
-	 * param Int $dmg
+	 * @param Player $player
+	 * @param Int $dmg
 	 */
 	
 	public function useArmors(Player $player, Int $dmg = 1): void{
