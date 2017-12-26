@@ -8,6 +8,8 @@ use pocketmine\item\enchantment\Enchantment;
 
 class VanillaEnchant{
 	
+	# ToDo: Move these values into Item const
+	
 	const HELMET =  [
 	      298 => 56,
 	      314 => 78,
@@ -42,11 +44,9 @@ class VanillaEnchant{
 	
 	const REJECTED = [
 	      Item::SKULL,
-	      Item::PUMPKIN
+	      Item::PUMPKIN,
+	      Item::AIR
 	];
-	
-	/** @var Int[] */
-	private $cd = [];
 	
 	/**
 	 * @param Player $player
@@ -61,7 +61,7 @@ class VanillaEnchant{
 		      $return += $armor->getEnchantment($id)->getLevel();
 		    }
 	    }
-	return $return;
+	    return $return;
 	}
 	
 	/**
@@ -99,7 +99,7 @@ class VanillaEnchant{
 	           $dmg = (($base * (25 / 100))  * $level) + 1;
 	        break;    
 	     }
-	return isset($dmg) ? $dmg : 0.0;
+	     return isset($dmg) ? $dmg : 0.0;
 	}
 	
 	/**
@@ -133,24 +133,7 @@ class VanillaEnchant{
 	           $reduce = $base * $factor;
 	        break;
 	     }
-	return isset($reduce) and $reduce <= $base ? $reduce : abs($base - $reduce);
-	}
-	
-	/**
-	 * @param Player $player
-	 * @return bool
-	 */
-	
-	public function checkCoolDown(string $var, Int $cd = 1, Player $player): bool{
-	    if(isset($this->cd[$var][$player->getName()]) == false){
-		   $this->cd[$var][$player->getName()] = time();
-		 return true;
-		 }
-		 if(($this->cd[$var][$player->getName()] + $cd) - time() <= 0){
-			$this->cd[$var][$player->getName()] = time();
-		 return true;
-	 	 }
-	return false;
+	     return isset($reduce) and $reduce <= $base ? $reduce : abs($base - $reduce);
 	}
 	
 	/**
@@ -160,8 +143,8 @@ class VanillaEnchant{
 	
 	protected function addHelmetDurability(Player $player, Int $dur): void{
 	    $inv = $player->getInventory();
-	    if($inv->getHelmet()->getId() == 0 or in_array($inv->getHelmet()->getId(), self::REJECTED)){
-		   return;
+	    if(in_array($inv->getHelmet()->getId(), self::REJECTED)){
+		    return;
 		 }
 		 $helmet = $inv->getHelmet();
 		 $helmet->setDamage($helmet->getDamage() - $dur > 0 ? $helmet->getDamage() - $dur : 0);

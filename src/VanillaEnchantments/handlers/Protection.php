@@ -18,26 +18,24 @@ class Protection extends VanillaEnchant implements Listener{
 	
 	/**
 	 * @param EntityDamageEvent $event
-	 * @priority HIGHEST
-	 * @ignoreCancelled false
 	 */
 	
 	public function onDamage(EntityDamageEvent $event): void{
-	    $player = $event->getEntity();
-	    $cause = $event->getCause();
-	    if($event->isCancelled() or $cause == $event::CAUSE_STARVATION or $cause == $event::CAUSE_MAGIC){
-		   return;
-		 }
-	    if($player instanceof Player){
-		   if($this->checkCoolDown("durability", 1, $player)){
-			  $this->useArmors($player);
-			}
-		   $level = $this->getEnchantmentLevelOfArmors($player, Enchantment::PROTECTION);
-		   $base = $event->getDamage();
-		   $reduce = $this->getReducedDamage(Enchantment::PROTECTION, $base, $level);
-		   if($reduce > 0){
-			  $event->setDamage($base - $reduce);
-         }
-		}
-	}
+	      $player = $event->getEntity();
+	      $cause = $event->getCause();
+	      if($event->isCancelled() or $cause == $event::CAUSE_STARVATION or $cause == $event::CAUSE_MAGIC){
+		      return;
+		   }
+	      if($player instanceof Player){
+		      if(rand(1, 100) == 2){ # An hacky timer yet useful
+			      $this->useArmors($player);
+			   }
+		      $level = $this->getEnchantmentLevelOfArmors($player, Enchantment::PROTECTION);
+		      $base = $event->getDamage();
+		      $reduce = $this->getReducedDamage(Enchantment::PROTECTION, $base, $level);
+		      if($reduce > 0){
+			      $event->setDamage($base - $reduce);
+            }
+		  }
+    }
 }
