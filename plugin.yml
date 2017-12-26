@@ -1,10 +1,12 @@
 ---
 name: VanillaEnchantments
-version: 2.0.0-dev
+version: 3.0.0_ALPHA10
 api:
-- 3.0.0-ALPHA9
 - 3.0.0-ALPHA10
+- 3.0.0-ALPHA9
+- 3.0.0-ALPHA8 # Alpha 8 isn't supported!
 author: TheAz928
 main: VanillaEnchantments\Core
-description: 'Implement vanilla enchantments in your PocketMine-MP (BedRockEngine) server!'
+description: "Implement vanilla enchantments in your PocketMine-MP (BedRockEngine) server!"
+
 ...
