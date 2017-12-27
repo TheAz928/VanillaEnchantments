@@ -46,7 +46,7 @@ class Fortune extends VanillaEnchant implements Listener{
 		             $event->setDrops([Item::get(Item::REDSTONE, 0, rand(2, 3) + $rand)]);
 		           }
 	           break;
-	           case Block::UNLIT_REDSTONE_ORE:
+	           case Block::REDSTONE_ORE:
 	              if($item->isPickaxe() and $item->getId() !== Item::WOODEN_PICKAXE){
 		              $event->setDrops([Item::get(Item::REDSTONE, 0, rand(2, 3) + $rand)]);
 		           }
