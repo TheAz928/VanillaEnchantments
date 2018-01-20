@@ -30,7 +30,6 @@ class Core extends PluginBase{
 	    $this->registerBlastProtection();
 	    $this->registerProjectileProtection();
 	    $this->registerThorns();
-	    $this->registerRespiration();
 	    $this->registerDepthStrider();
 	    $this->registerAquaAffinity();
 	    $this->registerSharpness();
@@ -39,9 +38,6 @@ class Core extends PluginBase{
 	    $this->registerKnockback();
 	    $this->registerFireAspect();
 	    $this->registerLooting();
-	    $this->registerEfficiency();
-	    $this->registerSilkTouch();
-	    $this->registerUnbreaking();
 	    $this->registerFortune();
 	    $this->registerPower();
 	    $this->registerPunch();
@@ -101,14 +97,6 @@ class Core extends PluginBase{
 	public function registerThorns(){
 	    Enchantment::registerEnchantment(new Enchantment(Enchantment::THORNS, "Thorns", 1, Enchantment::SLOT_ARMOR, 3));
 	    return new handlers\Thorns($this);
-	}
-	
-	/**
-	 * @return null
-	 */
-	
-	public function registerRespiration(){
-	    Enchantment::registerEnchantment(new Enchantment(Enchantment::RESPIRATION, "Respiration", 1, Enchantment::SLOT_HEAD, 3));
 	}
 	
 	/**
@@ -180,32 +168,6 @@ class Core extends PluginBase{
 	public function registerLooting(){
 	    Enchantment::registerEnchantment(new Enchantment(Enchantment::LOOTING, "Looting", 1, Enchantment::SLOT_SWORD, 3));
 	    return new handlers\Looting($this);
-	}
-	
-	/**
-	 * @return null
-	 */
-	
-	public function registerEfficiency(){ 
-	    Enchantment::registerEnchantment(new Enchantment(Enchantment::EFFICIENCY, "Efficiency", 1, Enchantment::SLOT_PICKAXE, 5));
-   }
-
-   /**
-	 * @return SilkTouch
-	 */
-	
-	public function registerSilkTouch(){
-	    Enchantment::registerEnchantment(new Enchantment(Enchantment::SILK_TOUCH, "Silk touch", 2, Enchantment::SLOT_TOOL, 1));
-   	 return new handlers\SilkTouch($this);
-	}
-	
-	/**
-	 * @return Unbreaking
-	 */
-	
-	public function registerUnbreaking(){
-	    Enchantment::registerEnchantment(new Enchantment(Enchantment::UNBREAKING, "Unbreaking", 0, Enchantment::SLOT_TOOL, 3));
-   	  return new handlers\Unbreaking($this);
 	}
 	
 	/**
