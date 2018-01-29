@@ -29,7 +29,6 @@ class Infinity extends VanillaEnchant implements Listener{
 			 if($arrow->getNameTag() == "infinity") {
 				 $event->setCancelled();
 			 }
-
 	}
 
 	/**
@@ -42,17 +41,15 @@ class Infinity extends VanillaEnchant implements Listener{
 		 	$arrow = $event->getProjectile();
 
 		 	if($event->isCancelled()){
-		  	 return;
+		  	    return;
 	   	}
 
 	   	if($bow->hasEnchantment(Enchantment::INFINITY)){
-				 $arrow->setNameTag("infinity");
+			$arrow->setNameTag("infinity");
 
-			   if($player instanceof Player and $player->isSurvival()){
-			       $player->getInventory()->addItem(Item::get(Item::ARROW, 0, 1));
-
-
-		   	 }
-	    }
+		        if($player instanceof Player and $player->isSurvival()){
+		            $player->getInventory()->addItem(Item::get(Item::ARROW, 0, 1));
+		  	}
+    		}
 	 }
 }
