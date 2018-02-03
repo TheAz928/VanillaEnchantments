@@ -1,4 +1,5 @@
 <?php
+
 namespace VanillaEnchantments\handlers;
 
 use pocketmine\Player;
@@ -56,7 +57,7 @@ class VanillaEnchant{
 	
 	protected function getEnchantmentLevelOfArmors(Player $player, Int $id): Int{
 		 $return = 0;
-	    foreach($player->getInventory()->getArmorContents() as $armor){
+	    foreach($player->getArmorInventory()->getContents() as $armor){
 	       if($armor->hasEnchantment($id)){
 		      $return += $armor->getEnchantment($id)->getLevel();
 		    }
@@ -142,7 +143,7 @@ class VanillaEnchant{
 	 */
 	
 	protected function addHelmetDurability(Player $player, Int $dur): void{
-	    $inv = $player->getInventory();
+	    $inv = $player->getArmorInventory();
 	    if(in_array($inv->getHelmet()->getId(), self::REJECTED)){
 		    return;
 		 }
@@ -161,7 +162,7 @@ class VanillaEnchant{
 	 */
 	
 	protected function addChestplateDurability(Player $player, Int $dur): void{
-	    $inv = $player->getInventory();
+	    $inv = $player->getArmorInventory();
 	    if($inv->getChestplate()->getId() == 0){
 		   return;
 		 }
@@ -180,7 +181,7 @@ class VanillaEnchant{
 	 */
 	
 	protected function addLeggingsDurability(Player $player, Int $dur): void{
-	    $inv = $player->getInventory();
+	    $inv = $player->getArmorInventory();
 	    if($inv->getLeggings()->getId() == 0){
 		   return;
 		 }
@@ -199,7 +200,7 @@ class VanillaEnchant{
 	 */
 	
 	protected function addBootsDurability(Player $player, Int $dur): void{
-	    $inv = $player->getInventory();
+	    $inv = $player->getArmorInventory();
 	    if($inv->getBoots()->getId() == 0){
 		   return;
 		 }
