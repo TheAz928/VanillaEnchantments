@@ -1,1 +1,17 @@
+---
+# Developed by TheAz928
+# VanillaEnchantments configuration file
 
+# Armor damage trigger time (In seconds)
+# Recommended to not set 0 or 1
+check.time: 2
+
+# Armor damage per hit
+# This defines how much damage
+# Should armor take if player was hit
+armor.damage: 1
+
+# Version, recommended to not change
+version: "0x1"
+
+...
