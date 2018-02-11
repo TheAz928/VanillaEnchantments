@@ -284,7 +284,7 @@ class Core extends PluginBase implements Listener{
 							}
 						break;
 						case Item::NETHER_QUARTZ_ORE:
-							$event->setDrops([Item::get(Item::NETHER_QUARTZ, 1, rand(4, 8) + $add)]);
+							$event->setDrops([Item::get(Item::NETHER_QUARTZ, 0, rand(4, 8) + $add)]);
 						break;
 					}
 				}
