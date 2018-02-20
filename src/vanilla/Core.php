@@ -12,6 +12,7 @@ use pocketmine\item\Bow;
 use pocketmine\item\enchantment\Enchantment;
 
 use pocketmine\entity\Entity;
+use pocketmine\entity\Living;
 
 use pocketmine\event\Listener;
 
@@ -284,7 +285,7 @@ class Core extends PluginBase implements Listener{
 							}
 						break;
 						case Item::NETHER_QUARTZ_ORE:
-							$event->setDrops([Item::get(Item::NETHER_QUARTZ, 0, rand(4, 8) + $add)]);
+							$event->setDrops([Item::get(Item::NETHER_QUARYZ, 1, rand(4, 8) + $add)]);
 						break;
 					}
 				}
@@ -302,6 +303,9 @@ class Core extends PluginBase implements Listener{
 				return;
 			}
 			$player = $event->getEntity();
+			if($player instanceof Living){
+				$player->applyDamageModifiers($event);
+			}
 			$ignore = [
 				EntityDamageEvent::CAUSE_STARVATION,
 				EntityDamageEvent::CAUSE_MAGIC,
