@@ -20,7 +20,7 @@ use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\entity\EntityShootBowEvent;
-use pocketmine\event\entity\ProjectileHitEvent;
+use pocketmine\event\entity\ProjectileHitBlockEvent;
 
 use pocketmine\network\mcpe\protocol\PlaySoundPacket;
 
@@ -252,7 +252,7 @@ class Core extends PluginBase implements Listener{
 	
 	/**
 	 * @param BlockBreakEvent $event
-	 * 
+	 * @param ignoreCancelled false
 	 * @priority LOWEST
 	 */
 	
@@ -294,8 +294,8 @@ class Core extends PluginBase implements Listener{
 	
 	/**
 	 * @param EntityDamageEvent $event
-	 * 
-	 * @priority HIGHEST
+	 * @ignoreCancelled false
+	 * @priority NORMAL
 	 */
 	
 	public function onDamage(EntityDamageEvent $event) : void{
@@ -372,8 +372,8 @@ class Core extends PluginBase implements Listener{
 	
 	/**
 	 * @param EntityShootBowEvent $event
-	 * 
-	 * @priority HIGHEST
+	 * @ignoreCancelled false
+	 * @priority MONITOR
 	 */
 	
 	public function onShoot(EntityShootBowEvent $event) : void{
@@ -381,7 +381,7 @@ class Core extends PluginBase implements Listener{
 			$arrow = $event->getProjectile();
 			$item = $event->getBow();
 			if($event->isCancelled() == false){
-				$event->setForce($event->getForce() + 0.5); // In vanilla, arrows are fast
+				$event->setForce($event->getForce() + 0.8); // In vanilla, arrows are fast
 				if(($level = $item->getEnchantmentLevel(Enchantment::FLAME)) > 0){
 					$arrow->namedtag->setShort("Fire", 20 * $level);
 					$arrow->setOnFire(80);
@@ -397,11 +397,11 @@ class Core extends PluginBase implements Listener{
 	
 	/**
 	 * @param ProjectileHitEvent $event
-	 * 
+	 * @ignoreCancelled true
 	 * @priority HIGHEST
 	 */
 	
-	public function onHit(ProjectileHitEvent $event) : void{
+	public function onGroundHit(ProjectileHitBlockEvent $event) : void{
 			$entity = $event->getEntity();
 			if($entity->namedtag->getByte("inf", 0) > 0){
 				$entity->flagForDespawn();
