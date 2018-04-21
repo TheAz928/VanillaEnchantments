@@ -22,7 +22,7 @@ Drop the phar file into plugins folder as usual, then just reload server
 - [x] Fire aspect
 - [x] Looting
 - [x] Efficiency
-- [x] Silk touch **- Implemented by pmmp?**
+- [x] Silk touch
 - [x] Unbreaking
 - [x] Fortune
 - [x] Power
@@ -32,7 +32,7 @@ Drop the phar file into plugins folder as usual, then just reload server
 - [ ] Luck of the sea
 - [ ] Lure
 - [ ] Frost walker
-- [ ] Mending
+- [x] Mending
 
 # For support
 Twitter: @TheAz928
