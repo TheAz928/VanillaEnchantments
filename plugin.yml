@@ -1,6 +1,6 @@
 ---
 name: VanillaEnchantments
-version: 3.0.0-ALPHA11
+version: 3.1.0_ALPHA
 api:
 - 3.0.0-ALPHA9
 - 3.0.0-ALPHA10
