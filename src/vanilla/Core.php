@@ -137,6 +137,7 @@ class Core extends PluginBase implements Listener{
 			if($event->isCancelled()){
 				return;
 			}
+			$player = $event->getEntity();
 			if($event instanceof EntityDamageByEntityEvent){
 				if(($damager = $event->getDamager()) instanceof Player){
 					if(($level = $damager->getInventory()->getItemInHand()->getEnchantmentLevel(Enchantment::SHARPNESS)) > 0){
