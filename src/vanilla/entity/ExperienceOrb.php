@@ -7,132 +7,19 @@ use pocketmine\item\Durable;
 use pocketmine\item\enchantment\Enchantment;
 
 use pocketmine\entity\Entity;
+use pocketmine\entity\object\ExperienceOrb as PMXP;
 use pocketmine\entity\Human;
 
 use pocketmine\nbt\tag\IntTag;
 use pocketmine\nbt\tag\ShortTag;
 
-class ExperienceOrb extends Entity{
-	const NETWORK_ID = self::XP_ORB;
-
- 	const TAG_VALUE_PC = "Value"; 
-	const TAG_VALUE_PE = "experience value";
+class ExperienceOrb extends PMXP{
 
 	/**
-	 * Max distance an orb will follow a player across.
-	 */
-	public const MAX_TARGET_DISTANCE = 8.0;
-
-	/**
-	 * Split sizes used for dropping experience orbs.
-	 */
-	public const ORB_SPLIT_SIZES = [2477, 1237, 617, 307, 149, 73, 37, 17, 7, 3, 1]; //This is indexed biggest to smallest so that we can return as soon as we found the biggest value.
-
-	/**
-	 * Returns the largest size of normal XP orb that will be spawned for the specified amount of XP. Used to split XP
-	 * up into multiple orbs when an amount of XP is dropped.
-	 *
-	 * @param int $amount
-	 *
-	 * @return int
+	 * @param int $tickDiff
+	 * @return bool
 	 */
 	
-	public static function getMaxOrbSize(int $amount) : int{
-			foreach(self::ORB_SPLIT_SIZES as $split){
-				if($amount >= $split){
-					return $split;
-				}
-			}
-			return 1;
-	}
-
-	/**
-	 * Splits the specified amount of XP into an array of acceptable XP orb sizes.
-	 *
-	 * @param int $amount
-	 *
-	 * @return int[]
-	 */
-	
-	public static function splitIntoOrbSizes(int $amount) : array{
-			$result = [];
-			while($amount > 0){
-				$size = self::getMaxOrbSize($amount);
-				$result[] = $size;
-				$amount -= $size;
-			}
-			return $result;
-	}
-
-	public $height = 0.25;
-	
-	public $width = 0.25;
-
-	public $gravity = 0.04;
-	
-	public $drag = 0.02;
-
-	/**
-	 * @var int
-	 * Ticker used for determining interval in which to look for new target players.
-	 */
-	protected $lookForTargetTime = 0;
-
-	/**
-	 * @var int|null
-	 * Runtime entity ID of the player this XP orb is targeting.
-	 */
-	protected $targetPlayerRuntimeId = null;
-
-	protected function initEntity(){
-			parent::initEntity();
-			$this->age = $this->namedtag->getShort("Age", 0);
-			$value = 0;
-			if($this->namedtag->hasTag(self::TAG_VALUE_PC, ShortTag::class)){ //PC
-				$value = $this->namedtag->getShort(self::TAG_VALUE_PC);
-			}elseif($this->namedtag->hasTag(self::TAG_VALUE_PE, IntTag::class)){ //PE save format
-				$value = $this->namedtag->getInt(self::TAG_VALUE_PE);
-			}
-			$this->setXpValue($value);
-	}
-
-	public function saveNBT(){
-			parent::saveNBT();
-			$this->namedtag->setShort("Age", $this->age);
-			$this->namedtag->setShort(self::TAG_VALUE_PC, $this->getXpValue());
-			$this->namedtag->setInt(self::TAG_VALUE_PE, $this->getXpValue());
-	}
-
-	public function getXpValue() : int{
-			return $this->propertyManager->getInt(self::DATA_EXPERIENCE_VALUE) ?? 0;
-	}
-
-	public function setXpValue(int $amount) : void{
-			if($amount <= 0){
-				throw new \InvalidArgumentException("XP amount must be greater than 0, got $amount");
-			}
-			$this->propertyManager->setInt(self::DATA_EXPERIENCE_VALUE, $amount);
-	}
-
-	public function hasTargetPlayer() : bool{
-			return $this->targetPlayerRuntimeId !== null;
-	}
-
-	public function getTargetPlayer() : ?Human{
-			if($this->targetPlayerRuntimeId === null){
-				return null;
-			}
-			$entity = $this->server->findEntity($this->targetPlayerRuntimeId, $this->level);
-			if($entity instanceof Human){
-				return $entity;
-			}
-			return null;
-	}
-
-	public function setTargetPlayer(?Human $player) : void{
-			$this->targetPlayerRuntimeId = $player ? $player->getId() : null;
-	}
-
 	public function entityBaseTick(int $tickDiff = 1) : bool{
 			$hasUpdate = Entity::entityBaseTick($tickDiff);
 			if($this->age > 6000){
@@ -213,14 +100,5 @@ class ExperienceOrb extends Entity{
 				}
 			}
 			return $hasUpdate;
-	}
-	
-	protected function tryChangeMovement(){
-			$this->checkObstruction($this->x, $this->y, $this->z);
-			parent::tryChangeMovement();
-	}
-
-	public function canBeCollidedWith() : bool{
-			return false;
 	}
 }
