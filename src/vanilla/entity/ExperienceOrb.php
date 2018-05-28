@@ -47,9 +47,9 @@ class ExperienceOrb extends PMXP{
 				$distance = $vector->length();
 				$oneMinusDistance = (1 - $distance) ** 2;
 				if($oneMinusDistance > 0){
-					$this->motionX += $vector->x / $distance * $oneMinusDistance * 0.2;
-					$this->motionY += $vector->y / $distance * $oneMinusDistance * 0.2;
-					$this->motionZ += $vector->z / $distance * $oneMinusDistance * 0.2;
+					$this->motion->x += $vector->x / $distance * $oneMinusDistance * 0.2;
+					$this->motion->y += $vector->y / $distance * $oneMinusDistance * 0.2;
+					$this->motion->z += $vector->z / $distance * $oneMinusDistance * 0.2;
 				}
 				if($currentTarget->canPickupXp() and $this->boundingBox->intersectsWith($currentTarget->getBoundingBox())){
 					$this->flagForDespawn();
