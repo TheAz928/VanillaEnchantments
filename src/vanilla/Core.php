@@ -128,63 +128,62 @@ class Core extends PluginBase implements Listener{
 	}
 	
 	/**
-	 * @param EntityDamageEvent $event
+	 * @param EntityDamageByEntityEvent $event
 	 * @ignoreCancelled false
 	 * @priority NORMAL
 	 */
 	
-	public function onDamage(EntityDamageEvent $event) : void{
+	public function onDamage(EntityDamageByEntityEvent $event) : void{
 			if($event->isCancelled()){
 				return;
 			}
 			$player = $event->getEntity();
-			if($event instanceof EntityDamageByEntityEvent){
-				if(($damager = $event->getDamager()) instanceof Player){
-					if(($level = $damager->getInventory()->getItemInHand()->getEnchantmentLevel(Enchantment::SHARPNESS)) > 0){
-						$damage = $event->getDamage() + ($level * 0.4 + 1);
-						$event->setDamage($damage);
+			if(($damager = $event->getDamager()) instanceof Player){
+				if(($level = $damager->getInventory()->getItemInHand()->getEnchantmentLevel(Enchantment::SHARPNESS)) > 0){
+					$damage = $event->getBaseDamage() + ($level * 0.4 + 1);
+					$event->setBaseDamage($damage);
+				}
+				if(($level = $damager->getInventory()->getItemInHand()->getEnchantmentLevel(Enchantment::KNOCKBACK)) > 0){
+					$event->setKnockBack((0.4 * $level) + 0.1);
+				}
+				if(($level = $damager->getInventory()->getItemInHand()->getEnchantmentLevel(Enchantment::FIRE_ASPECT)) > 0){
+					$player->setOnFire(10 * $level);
+				}
+				if(($level = $damager->getInventory()->getItemInHand()->getEnchantmentLevel(Enchantment::SMITE)) > 0){
+					if(in_array(self::UNDEAD, $player::NETWORK_ID)){
+						$event->setBaseDamage($event->getBaseDamage() + (2.5 * $level));
 					}
-					if(($level = $damager->getInventory()->getItemInHand()->getEnchantmentLevel(Enchantment::KNOCKBACK)) > 0){
-						$event->setKnockBack((0.4 * $level) + 0.1);
+				}
+				if(($level = $damager->getInventory()->getItemInHand()->getEnchantmentLevel(Enchantment::BANE_OF_ARTHROPODS)) > 0){
+					if(in_array(self::ARTHROPODS, $player::NETWORK_ID)){
+						$event->setBaseDamage($event->getBaseDamage() + (2.5 * $level));
 					}
-					if(($level = $damager->getInventory()->getItemInHand()->getEnchantmentLevel(Enchantment::FIRE_ASPECT)) > 0){
-						$player->setOnFire(10 * $level);
-					}
-					if(($level = $damager->getInventory()->getItemInHand()->getEnchantmentLevel(Enchantment::SMITE)) > 0){
-						if(in_array(self::UNDEAD, $player::NETWORK_ID)){
-							$event->setDamage($event->getDamage() + (2.5 * $level));
+				}
+				if(($level = $damager->getInventory()->getItemInHand()->getEnchantmentLevel(Enchantment::POWER)) > 0 and $damager->getInventory()->getItemInHand() instanceof Bow and $event->getCause() == EntityDamageEvent::CAUSE_PROJECTILE){
+					$add = ($event->getBaseDamage() * (25 / 100)) * $level; // Each level adds +25% of base damage
+					$event->setBaseDamage($event->getBaseDamage() + $add);
+				}
+				if(($level = $damager->getInventory()->getItemInHand()->getEnchantmentLevel(Enchantment::PUNCH)) > 0 and $damager->getInventory()->getItemInHand() instanceof Bow and $event->getCause() == EntityDamageEvent::CAUSE_PROJECTILE){
+					$event->setKnockBack((0.4 * $level) + 0.1);
+				}
+				// ToDo: proper loot table
+				if(($level = $damager->getInventory()->getItemInHand()->getEnchantmentLevel(Enchantment::LOOTING)) > 0){
+					if($player instanceof Player == false and $event->getFinalDamage() >= $player->getHealth()){
+						$player->flagForDespawn();
+						foreach($player->getDrops() as $drop){
+							$drop->setCount($drop->getCount() + rand(0, $level));
+							$damager->getLevel()->dropItem($player, $drop);
 						}
 					}
-					if(($level = $damager->getInventory()->getItemInHand()->getEnchantmentLevel(Enchantment::BANE_OF_ARTHROPODS)) > 0){
-						if(in_array(self::ARTHROPODS, $player::NETWORK_ID)){
-							$event->setDamage($event->getDamage() + (2.5 * $level));
-						}
-					}
-					if(($level = $damager->getInventory()->getItemInHand()->getEnchantmentLevel(Enchantment::POWER)) > 0 and $damager->getInventory()->getItemInHand() instanceof Bow and $event->getCause() == EntityDamageEvent::CAUSE_PROJECTILE){
-						$add = ($event->getDamage() * (25 / 100)) * $level; // Each level adds +25% of base damage
-						$event->setDamage($event->getDamage() + $add);
-					}
-					if(($level = $damager->getInventory()->getItemInHand()->getEnchantmentLevel(Enchantment::PUNCH)) > 0 and $damager->getInventory()->getItemInHand() instanceof Bow and $event->getCause() == EntityDamageEvent::CAUSE_PROJECTILE){
-						$event->setKnockBack((0.4 * $level) + 0.1);
-					}
-					if(($level = $damager->getInventory()->getItemInHand()->getEnchantmentLevel(Enchantment::LOOTING)) > 0){
-						if($player instanceof Player == false and $event->getFinalDamage() >= $player->getHealth()){
-							$player->close();
-							foreach($player->getDrops() as $drop){
-								$drop->setCount($drop->getCount() + rand(0, $level));
-								$damager->getLevel()->dropItem($player, $drop);
-							}
-						}
-					}
-					if($player instanceof Player){
-						foreach($player->getArmorInventory()->getContents() as $slot => $armor){
-							if(($level = $armor->getEnchantmentLevel(Enchantment::THORNS)) > 0){
-								if(rand(1, 100) <= 15 * $level){
-									$damager->attack(new EntityDamageEvent($damager, EntityDamageEvent::CAUSE_CUSTOM, 2));
-									$armor->applyDamage(rand(2, 8));
-									$player->getArmorInventory()->setItem($slot, $armor);
-									break;
-								}
+				}
+				if($player instanceof Player){
+					foreach($player->getArmorInventory()->getContents() as $slot => $armor){
+						if(($level = $armor->getEnchantmentLevel(Enchantment::THORNS)) > 0){
+							if(rand(1, 100) <= 15 * $level){
+								$damager->attack(new EntityDamageEvent($damager, EntityDamageEvent::CAUSE_CUSTOM, 2));
+								$armor->applyDamage(rand(2, 8));
+								$player->getArmorInventory()->setItem($slot, $armor);
+								break;
 							}
 						}
 					}
