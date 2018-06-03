@@ -150,12 +150,12 @@ class Core extends PluginBase implements Listener{
 					$player->setOnFire(10 * $level);
 				}
 				if(($level = $damager->getInventory()->getItemInHand()->getEnchantmentLevel(Enchantment::SMITE)) > 0){
-					if(in_array(self::UNDEAD, $player::NETWORK_ID)){
+					if(in_array($player::NETWORK_ID, self::UNDEAD)){
 						$event->setBaseDamage($event->getBaseDamage() + (2.5 * $level));
 					}
 				}
 				if(($level = $damager->getInventory()->getItemInHand()->getEnchantmentLevel(Enchantment::BANE_OF_ARTHROPODS)) > 0){
-					if(in_array(self::ARTHROPODS, $player::NETWORK_ID)){
+					if(in_array($player::NETWORK_ID, self::ARTHROPODS)){
 						$event->setBaseDamage($event->getBaseDamage() + (2.5 * $level));
 					}
 				}
