@@ -168,7 +168,7 @@ class Core extends PluginBase implements Listener{
 				}
 				// ToDo: proper loot table
 				if(($level = $damager->getInventory()->getItemInHand()->getEnchantmentLevel(Enchantment::LOOTING)) > 0){
-					if($player instanceof Player == false and $event->getFinalDamage() >= $player->getHealth()){
+					if($player instanceof Player == false and $player instanceof Living and $event->getFinalDamage() >= $player->getHealth()){
 						$player->flagForDespawn();
 						foreach($player->getDrops() as $drop){
 							$drop->setCount($drop->getCount() + rand(0, $level));
