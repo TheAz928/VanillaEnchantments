@@ -202,8 +202,10 @@ class Core extends PluginBase implements Listener{
 			$arrow = $event->getProjectile();
 			$item = $event->getBow();
 			if($event->isCancelled() == false){
-				if($arrow::NETWORK_ID == Entity::ARROW){
+				if($arrow !== null and $arrow::NETWORK_ID == Entity::ARROW){
 					$event->setForce($event->getForce() + 0.95); // In vanilla, arrows are fast
+				}else{
+					return;
 				}
 				if(($level = $item->getEnchantmentLevel(Enchantment::FLAME)) > 0){
 					$arrow->namedtag->setShort("Fire", 20 * $level);
