@@ -6,6 +6,7 @@ use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
 
 use pocketmine\item\Item;
+use pocketmine\item\Sword;
 use pocketmine\item\ItemFactory;
 use pocketmine\item\Armor;
 use pocketmine\item\Bow;
@@ -69,11 +70,15 @@ class Core extends PluginBase implements Listener{
 	}
 	
 	public function registerTypes() : void{
+			Enchantment::registerEnchantment(new Enchantment(Enchantment::SHARPNESS, "Sharpness", Enchantment::RARITY_UNCOMMON, Enchantment::SLOT_SWORD, Enchantment::SLOT_AXE, 5));
 			Enchantment::registerEnchantment(new Enchantment(Enchantment::SMITE, "Smite", Enchantment::RARITY_UNCOMMON, Enchantment::SLOT_SWORD, Enchantment::SLOT_AXE, 5));
 			Enchantment::registerEnchantment(new Enchantment(Enchantment::BANE_OF_ARTHROPODS, "Bane of arthropods", Enchantment::RARITY_UNCOMMON, Enchantment::SLOT_SWORD, Enchantment::SLOT_AXE, 5));
 			
 			Enchantment::registerEnchantment(new Enchantment(Enchantment::LOOTING, "Looting", Enchantment::RARITY_UNCOMMON, Enchantment::SLOT_SWORD, Enchantment::SLOT_NONE, 3));
 			Enchantment::registerEnchantment(new Enchantment(Enchantment::FORTUNE, "Fortune", Enchantment::RARITY_UNCOMMON, Enchantment::SLOT_DIG, Enchantment::SLOT_NONE, 3));
+			
+			Enchantment::registerEnchantment(new Enchantment(Enchantment::PUNCH, "Punch", Enchantment::RARITY_UNCOMMON, Enchantment::SLOT_BOW, Enchantment::SLOT_NONE, 2));
+			Enchantment::registerEnchantment(new Enchantment(Enchantment::POWER, "Power", Enchantment::RARITY_UNCOMMON, Enchantment::SLOT_BOW, Enchantment::SLOT_NONE, 5));
 			
 			// ToDo: frost walker and others
 	}
@@ -131,27 +136,37 @@ class Core extends PluginBase implements Listener{
 	
 	/**
 	 * @param EntityDamageByEntityEvent $event
-	 * @ignoreCancelled false
+	 * @ignoreCancelled true
 	 * @priority NORMAL
 	 */
 	
 	public function onDamage(EntityDamageByEntityEvent $event) : void{
-			if($event->isCancelled()){
-				return;
-			}
 			$player = $event->getEntity();
 			if(($damager = $event->getDamager()) instanceof Player){
+				$item = $damager->getInventory()->getItemInHand();
 				
-				if(($level = $damager->getInventory()->getItemInHand()->getEnchantmentLevel(Enchantment::SMITE)) > 0){
+				if(($level = $item->getEnchantmentLevel(Enchantment::SMITE)) > 0){
 					if(in_array($player::NETWORK_ID, self::UNDEAD)){
 						$event->setBaseDamage($event->getBaseDamage() + (2.5 * $level));
 					}
 				}
 				
-				if(($level = $damager->getInventory()->getItemInHand()->getEnchantmentLevel(Enchantment::BANE_OF_ARTHROPODS)) > 0){
+				if(($level = $item->getEnchantmentLevel(Enchantment::BANE_OF_ARTHROPODS)) > 0){
 					if(in_array($player::NETWORK_ID, self::ARTHROPODS)){
 						$event->setBaseDamage($event->getBaseDamage() + (2.5 * $level));
 					}
+				}
+				
+				if(($level = $item->getEnchantmentLevel(Enchantment::SHARPNESS)) > 0 and $item instanceof Sword){
+					$event->setBaseDamage($event->getBaseDamage() + 1 + (0.4 * $level));
+				}
+				
+				if(($level = $item->getEnchantmentLevel(Enchantment::POWER)) > 0 and $item instanceof Bow){
+					$event->setBaseDamage($event->getBaseDamage() + (($event->getBaseDamage() * (25 / 100)) * $level));
+				}
+				
+				if(($level = $item->getEnchantmentLevel(Enchantment::PUNCH)) > 0 and $item instanceof Bow){
+					$event->setKnockBack($event->getKnockBack() + (0.25 * $level));
 				}
 				
 				// ToDo: proper loot table
