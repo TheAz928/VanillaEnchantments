@@ -2,16 +2,27 @@
 # Developed by TheAz928
 # VanillaEnchantments configuration file
 
-# Armor damage trigger time (In seconds)
-# Recommended to not set 0 or 1
-check.time: 2
+# Fortune applicable blocks
+# Only these blocks will have their drops multiplied
+# Format: "name or id"
+fortune.blocks:
+- coal_ore
+- iron_ore
+- gold_ore
+- diamond_ore
+- leaves
+- nether_quartz_ore
+- glowstone_block
+- redstone_ore
+- emerald_ore
+- glowing_redstone_ore
 
-# Armor damage per hit
-# This defines how much damage
-# Should armor take if player was hit
-armor.damage: 1
+# Looting applicable entities
+looting.entities:
+  chicken:
+  - "feather" # If drops contain feather, it'll be multiplied
 
 # Version, recommended to not change
-version: "0x1"
+version: "1.2.5"
 
 ...
