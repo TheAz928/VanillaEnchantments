@@ -261,11 +261,11 @@ class Core extends PluginBase implements Listener{
 			$arrow->namedtag->setShort("Fire", 40 * $bow->getEnchantmentLevel(Enchantment::FLAME) + 1);
 		}
 		
-		if($bow->hasEnchantment(Enchantment::POWER)) and $arrow::NETWORK_ID == Entity::ARROW){
+		if($bow->hasEnchantment(Enchantment::POWER) and $arrow::NETWORK_ID == Entity::ARROW){
 			$arrow->namedtag->setShort("power", $bow->getEnchantmentLevel(Enchantment::POWER));
 		}
 				
-		if($bow->hasEnchantment(Enchantment::PUNCH)) and $arrow::NETWORK_ID == Entity::ARROW){
+		if($bow->hasEnchantment(Enchantment::PUNCH) and $arrow::NETWORK_ID == Entity::ARROW){
 			$arrow->namedtag->setShort("punch", $bow->getEnchantmentLevel(Enchantment::PUNCH));
 		}
 			
