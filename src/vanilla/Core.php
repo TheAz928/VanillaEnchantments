@@ -287,12 +287,12 @@ class Core extends PluginBase implements Listener{
 	}
 	
 	/**
-	 * @param EntityDamageByChildEntity $event
+	 * @param EntityDamageByChildEntityEvent $event
 	 * @ignoreCancelled true
 	 * @priority LOWEST
 	 */
 	
-	public function onArrowHit(EntityDamageByChildEntity $event) : void{
+	public function onArrowHit(EntityDamageByChildEntityEvent $event) : void{
 		$arrow = $event->getChild();
 		
 		if($arrow !== null){
