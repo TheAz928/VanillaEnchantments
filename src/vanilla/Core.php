@@ -116,7 +116,7 @@ class Core extends PluginBase implements Listener{
 		}
 				
 		if(($level = $item->getEnchantmentLevel(Enchantment::FORTUNE)) > 0){
-			$add = my_rand(0, $level + 1);
+			$add = mt_rand(0, $level + 1);
 					
 			if($block->getId() == Block::LEAVES){
 				if(mt_rand(1, 99) <= 10){
