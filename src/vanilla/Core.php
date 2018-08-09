@@ -249,7 +249,7 @@ class Core extends PluginBase implements Listener{
 			$event->setForce($event->getForce() + 0.95); // In vanilla, arrows are fast
 		}
 		
-		if($bow->hasEnchantment(Enchantmemt::INFINITY)){
+		if($bow->hasEnchantment(Enchantment::INFINITY)){
 			$arrow->namedtag->setByte("infinity", 1);
 			
 			if(($entity = $event->getEntity()) instanceof Player){
