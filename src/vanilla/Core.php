@@ -5,6 +5,8 @@ use pocketmine\Player;
 
 use pocketmine\plugin\PluginBase;
 
+use pocketmine\block\Block;
+
 use pocketmine\item\Item;
 use pocketmine\item\Sword;
 use pocketmine\item\ItemFactory;
