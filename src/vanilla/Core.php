@@ -21,12 +21,8 @@ use pocketmine\event\Listener;
 use pocketmine\event\block\BlockBreakEvent;
 
 use pocketmine\event\entity\EntityDamageByEntityEvent;
-use pocketmine\event\entity\EntityDamageByChildEntityEvent;
 
 use pocketmine\event\entity\EntityShootBowEvent;
-use pocketmine\event\entity\ProjectileHitEntityEvent;
-
-use pocketmine\event\inventory\InventoryPickupArrowEvent;
 
 use vanilla\item\EnchantedBook;
 
@@ -79,25 +75,12 @@ class Core extends PluginBase implements Listener{
 		Enchantment::registerEnchantment(new Enchantment(Enchantment::DEPTH_STRIDER, "Depth strider", Enchantment::RARITY_UNCOMMON, Enchantment::SLOT_FEET, Enchantment::SLOT_AXE, 3));
 		Enchantment::registerEnchantment(new Enchantment(Enchantment::AQUA_AFFINITY, "Aqua affinity", Enchantment::RARITY_UNCOMMON, Enchantment::SLOT_HEAD, Enchantment::SLOT_AXE, 1));
 		
-		Enchantment::registerEnchantment(new Enchantment(Enchantment::SHARPNESS, "Sharpness", Enchantment::RARITY_UNCOMMON, Enchantment::SLOT_SWORD, Enchantment::SLOT_AXE, 5));
-		
-		Enchantment::registerEnchantment(new Enchantment(Enchantment::FIRE_ASPECT, "Fire aspect", Enchantment::RARITY_UNCOMMON, Enchantment::SLOT_SWORD, Enchantment::SLOT_AXE, 2));
-		Enchantment::registerEnchantment(new Enchantment(Enchantment::KNOCKBACK, "Knockback", Enchantment::RARITY_UNCOMMON, Enchantment::SLOT_SWORD, Enchantment::SLOT_AXE, 2));
-		
 		Enchantment::registerEnchantment(new Enchantment(Enchantment::SMITE, "Smite", Enchantment::RARITY_UNCOMMON, Enchantment::SLOT_SWORD, Enchantment::SLOT_AXE, 5));
 		Enchantment::registerEnchantment(new Enchantment(Enchantment::BANE_OF_ARTHROPODS, "Bane of arthropods", Enchantment::RARITY_UNCOMMON, Enchantment::SLOT_SWORD, Enchantment::SLOT_AXE, 5));
 		
+		Enchantment::registerEnchantment(new Enchantment(Enchantment::UNBREAKING, "%enchantment.durability", Enchantment::RARITY_UNCOMMON, Enchantment::SLOT_DIG | Enchantment::SLOT_ARMOR | Enchantment::SLOT_FISHING_ROD | Enchantment::SLOT_BOW | Enchantment::SLOT_SWORD, Enchantment::SLOT_TOOL | Enchantment::SLOT_CARROT_STICK | Enchantment::SLOT_ELYTRA, 3));
 		Enchantment::registerEnchantment(new Enchantment(Enchantment::LOOTING, "Looting", Enchantment::RARITY_UNCOMMON, Enchantment::SLOT_SWORD, Enchantment::SLOT_NONE, 3));
 		Enchantment::registerEnchantment(new Enchantment(Enchantment::FORTUNE, "Fortune", Enchantment::RARITY_UNCOMMON, Enchantment::SLOT_DIG, Enchantment::SLOT_NONE, 3));
-		
-		Enchantment::registerEnchantment(new Enchantment(Enchantment::PUNCH, "Punch", Enchantment::RARITY_UNCOMMON, Enchantment::SLOT_BOW, Enchantment::SLOT_NONE, 2));
-		Enchantment::registerEnchantment(new Enchantment(Enchantment::POWER, "Power", Enchantment::RARITY_UNCOMMON, Enchantment::SLOT_BOW, Enchantment::SLOT_NONE, 5));
-		
-		Enchantment::registerEnchantment(new Enchantment(Enchantment::INFINITY, "Infinity", Enchantment::RARITY_UNCOMMON, Enchantment::SLOT_BOW, Enchantment::SLOT_NONE, 1));
-		Enchantment::registerEnchantment(new Enchantment(Enchantment::FLAME, "Flame", Enchantment::RARITY_UNCOMMON, Enchantment::SLOT_BOW, Enchantment::SLOT_NONE, 1));
-		
-		// Mending is removed due to 4.0.0+dev has better implemention for it, and there is no easy method to implement it in 3.0.0 but override entity
-		// ToDo: frost walker and others
 	}
 	
 	/**
@@ -168,26 +151,6 @@ class Core extends PluginBase implements Listener{
 					$event->setBaseDamage($event->getBaseDamage() + (2.5 * $item->getEnchantmentLevel(Enchantment::BANE_OF_ARTHROPODS)));
 				}
 			}
-				
-			if($item->hasEnchantment(Enchantment::SHARPNESS)){
-				$level = $item->getEnchantmentLevel(Enchantment::SHARPNESS);
-				$dmg = 1;
-				
-				if($level > 1){
-					$level -= 1;
-					$dmg += 0.4 * $level;
-				}
-				
-				$event->setBaseDamage($event->getBaseDamage() + $dmg);
-			}
-			
-			if($item->hasEnchantment(Enchantment::KNOCKBACK)){
-				$event->setKnockBack($event->getKnockBack() + (0.25 * $item->getEnchantmentLevel(Enchantment::KNOCKBACK)));
-			}
-			
-			if($item->hasEnchantment(Enchantment::FIRE_ASPECT)){
-				$player->setOnFire(40 * $item->getEnchantmentLevel(Enchantment::FIRE_ASPECT) + 1);
-			}
 			
 			if(($level = $damager->getInventory()->getItemInHand()->getEnchantmentLevel(Enchantment::LOOTING)) > 0){
 				if($player instanceof Player == false and $player instanceof Living and $event->getFinalDamage() >= $player->getHealth()){
@@ -249,63 +212,6 @@ class Core extends PluginBase implements Listener{
 		
 		if($arrow !== null and $arrow::NETWORK_ID == Entity::ARROW){
 			$event->setForce($event->getForce() + 0.95); // In vanilla, arrows are fast
-		}
-		
-		if($bow->hasEnchantment(Enchantment::INFINITY)){
-			$arrow->namedtag->setByte("infinity", 1);
-			
-			if(($entity = $event->getEntity()) instanceof Player){
-				$entity->getInventory()->addItem(Item::get(Item::ARROW));
-			}
-		}
-		if($bow->hasEnchantment(Enchantment::FLAME) and $arrow::NETWORK_ID == Entity::ARROW){
-			$arrow->setOnFire(80);
-			$arrow->namedtag->setShort("Fire", 40 * $bow->getEnchantmentLevel(Enchantment::FLAME) + 1);
-		}
-		
-		if($bow->hasEnchantment(Enchantment::POWER) and $arrow::NETWORK_ID == Entity::ARROW){
-			$arrow->namedtag->setShort("power", $bow->getEnchantmentLevel(Enchantment::POWER));
-		}
-				
-		if($bow->hasEnchantment(Enchantment::PUNCH) and $arrow::NETWORK_ID == Entity::ARROW){
-			$arrow->namedtag->setShort("punch", $bow->getEnchantmentLevel(Enchantment::PUNCH));
-		}
-			
-	}
-	
-	/**
-	 * @param InventoryPickupArrowEvent $event
-	 * @ignoreCancelled true
-	 * @priority LOWEST
-	 */
-	
-	public function onPickup(InventoryPickupArrowEvent $event) : void{
-		$arrow = $event->getArrow();
-		$inv = $event->getInventory();
-		
-		if($arrow->namedtag->hasTag("infinity") and $inv->getHolder()->isCreative() == false){
-			$event->setCancelled();
-		}
-	}
-	
-	/**
-	 * @param EntityDamageByChildEntityEvent $event
-	 * @ignoreCancelled true
-	 * @priority LOWEST
-	 */
-	
-	public function onArrowHit(EntityDamageByChildEntityEvent $event) : void{
-		$arrow = $event->getChild();
-		
-		if($arrow !== null){
-			if($arrow->namedtag->hasTag("punch")){
-				$event->setKnockBack($event->getKnockBack() + (0.25 * $arrow->namedtag->getShort("punch")));
-			}
-		}
-		if($arrow !== null){
-			if($arrow->namedtag->hasTag("power")){
-				$event->setBaseDamage($event->getBaseDamage() + (($event->getBaseDamage() * (25 / 100)) * $arrow->namedtag->getShort("power")));
-			}
 		}
 	}
 }
