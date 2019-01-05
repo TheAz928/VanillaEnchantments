@@ -115,7 +115,7 @@ class Core extends PluginBase implements Listener{
 				if($block->getId() == $it->getId()){
 					if(mt_rand(1, 99) <= 10 * $level){
 						if(empty($event->getDrops()) == false){
-							$event->setDrops(array_map(function(Item $drop){
+							$event->setDrops(array_map(function(Item $drop) use($add){
 								$drop->setCount($drop->getCount() + $add);
 								return $drop;
 							}, $event->getDrops()));
